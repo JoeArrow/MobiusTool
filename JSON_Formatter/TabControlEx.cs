@@ -126,7 +126,6 @@ namespace JSON_Formatter
         private void OnMouseDown(object sender, MouseEventArgs e)
         {
             SetCurrentTab(e);
-            var clickPoint = e.Location;
 
             if(CurrentTab.Text.Equals("New Tab", StringComparison.CurrentCultureIgnoreCase))
             {
@@ -134,6 +133,7 @@ namespace JSON_Formatter
             }
             else
             {
+                var clickPoint = e.Location;
                 var currentIndex = TabPages.IndexOf(CurrentTab);
                 var rectangle = GetTabRect(currentIndex);
 
@@ -145,6 +145,9 @@ namespace JSON_Formatter
 
                 if(clickedTheX)
                 {
+                    // -----------------
+                    // Deleting a Tab...
+
                     if(TabCount > MIN_PAGES)
                     {
                         TabPages.RemoveAt(currentIndex);
