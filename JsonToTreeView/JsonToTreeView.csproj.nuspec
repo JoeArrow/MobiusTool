@@ -1,0 +1,19 @@
+﻿<?xml version="1.0"?>
+<package>
+    <metadata>
+        <id>$id$</id>
+        <title>$title$</title>
+        <owners>Aflac Inc.</owners>
+        <version>$version$</version>
+        <copyright>$Copyright$</copyright>
+        <authors>E99965 - Joe Arrowood</authors>
+        <description>$description$</description>
+        <tags>JSON TreeView Utility Utilities Arrowood</tags>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <dependencies>
+            <dependency id="Newtonsoft.Json" version="12.0.2" />
+            <dependency id="TreePathFinder" version="1.0.0" />
+            <dependency id="Tools.Dynamic" version="1.0.7299" />
+        </dependencies>
+    </metadata>
+</package>

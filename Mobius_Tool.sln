@@ -1,0 +1,75 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29215.179
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mobius", "JSON_Formatter\Mobius.csproj", "{D248719D-7A08-4A44-89A8-84680D94D513}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsonToTreeView", "JsonToTreeView\JsonToTreeView.csproj", "{59CB817E-16BE-4582-8A1A-49E5CEE6B84C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsonToTreeView.Test", "JsonToTreeView.Test\JsonToTreeView.Test.csproj", "{AD457945-6CBD-4718-BF8C-9F46A7C13A66}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TreePathFinder", "JSONPathFinder\TreePathFinder.csproj", "{5F16B619-86A5-4C0B-8FA5-A6FAD0F3EB19}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{874C4F5A-724D-45A5-B3F4-20D94ADAFFED}"
+	ProjectSection(SolutionItems) = preProject
+		Notes.txt = Notes.txt
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TreePathFinder.Test", "TreePathFinder.Test\TreePathFinder.Test.csproj", "{1A3C2C22-BEF4-4185-BCF4-78C3A1DD73B1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D248719D-7A08-4A44-89A8-84680D94D513}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D248719D-7A08-4A44-89A8-84680D94D513}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D248719D-7A08-4A44-89A8-84680D94D513}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D248719D-7A08-4A44-89A8-84680D94D513}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59CB817E-16BE-4582-8A1A-49E5CEE6B84C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59CB817E-16BE-4582-8A1A-49E5CEE6B84C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59CB817E-16BE-4582-8A1A-49E5CEE6B84C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59CB817E-16BE-4582-8A1A-49E5CEE6B84C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD457945-6CBD-4718-BF8C-9F46A7C13A66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD457945-6CBD-4718-BF8C-9F46A7C13A66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD457945-6CBD-4718-BF8C-9F46A7C13A66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD457945-6CBD-4718-BF8C-9F46A7C13A66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F16B619-86A5-4C0B-8FA5-A6FAD0F3EB19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F16B619-86A5-4C0B-8FA5-A6FAD0F3EB19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F16B619-86A5-4C0B-8FA5-A6FAD0F3EB19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F16B619-86A5-4C0B-8FA5-A6FAD0F3EB19}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A3C2C22-BEF4-4185-BCF4-78C3A1DD73B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A3C2C22-BEF4-4185-BCF4-78C3A1DD73B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A3C2C22-BEF4-4185-BCF4-78C3A1DD73B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A3C2C22-BEF4-4185-BCF4-78C3A1DD73B1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9131D88C-EACB-4932-8799-EF7148E3DD86}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 6
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs.aflac.com:8080/tfs/globalcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = JsonToTreeView\\JsonToTreeView.csproj
+		SccProjectName1 = JsonToTreeView
+		SccLocalPath1 = JsonToTreeView
+		SccProjectUniqueName2 = JsonToTreeView.Test\\JsonToTreeView.Test.csproj
+		SccProjectName2 = JsonToTreeView.Test
+		SccLocalPath2 = JsonToTreeView.Test
+		SccProjectUniqueName3 = JSONPathFinder\\TreePathFinder.csproj
+		SccProjectName3 = JSONPathFinder
+		SccLocalPath3 = JSONPathFinder
+		SccProjectUniqueName4 = JSON_Formatter\\Mobius.csproj
+		SccProjectName4 = JSON_Formatter
+		SccLocalPath4 = JSON_Formatter
+		SccProjectUniqueName5 = TreePathFinder.Test\\TreePathFinder.Test.csproj
+		SccProjectName5 = TreePathFinder.Test
+		SccLocalPath5 = TreePathFinder.Test
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,39 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="JSON_Formatter.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="InitialPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Usage\SLI-Defects\Defect 290</Value>
+    </Setting>
+    <Setting Name="WordWrap" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="ExpansionThreshold" Type="System.Int64" Scope="User">
+      <Value Profile="(Default)">5000</Value>
+    </Setting>
+    <Setting Name="PathFinder" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Postman</Value>
+    </Setting>
+    <Setting Name="LoadExpanded" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="DefaultTabText" Type="System.String" Scope="User">
+      <Value Profile="(Default)">JSON Tab</Value>
+    </Setting>
+    <Setting Name="Exporter" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Mobius</Value>
+    </Setting>
+    <Setting Name="Size" Type="System.Drawing.Size" Scope="User">
+      <Value Profile="(Default)">1002, 1002</Value>
+    </Setting>
+    <Setting Name="Location" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">200, 50</Value>
+    </Setting>
+    <Setting Name="ConstExtension" Type="System.String" Scope="User">
+      <Value Profile="(Default)">const</Value>
+    </Setting>
+    <Setting Name="ConstantsPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+  </Settings>
+</SettingsFile>

@@ -1,0 +1,27 @@
+Fixed-Width Fonts:
+    Consolas
+    Courier
+
+ScintillaNET
+    Setting the Font:  
+        https://github.com/jacobslusser/ScintillaNET/wiki/Automatic-Syntax-Highlighting
+
+        scintellaNetObj.Styles[Style.Default].Size = 10;
+        scintellaNetObj.Styles[Style.Default].Font = "Consolas";
+
+Pattern Site:
+    https://refactoring.guru/design-patterns/strategy/csharp/example
+
+GBFP SLI URLs
+    Dedicated:
+        UI:     http://dcwws01/706_Training_706/
+        SLI:    http://dcwws01:9706/api/rest/GBFP
+
+    Dev:
+        SLI:    http://dcwws01:9719/api/rest/GBFP
+
+    Intg:
+        SLI:    http://icwws01:9701/api/rest/GBFP/
+
+Regular Expression (Microsoft)
+    https://docs.microsoft.com/en-us/visualstudio/ide/using-regular-expressions-in-visual-studio?view=vs-2015&redirectedfrom=MSDN

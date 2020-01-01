@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{59CB817E-16BE-4582-8A1A-49E5CEE6B84C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>JsonToTreeView</RootNamespace>
+    <AssemblyName>JsonToTreeView</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>false</Deterministic>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>JSON.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AflacSortable, Version=1.0.6232.28381, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AflacSortable.1.0.6232.28381\lib\net45\AflacSortable.dll</HintPath>
+    </Reference>
+    <Reference Include="JSON.String.Extensions, Version=1.0.7277.11637, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\JSON.String.Extensions.1.0.7277.11637\lib\net472\JSON.String.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="ScintillaNET, Version=3.6.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\jacobslusser.ScintillaNET.3.6.3\lib\net40\ScintillaNET.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Tools.Dynamic, Version=1.0.7300.11401, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Tools.Dynamic.1.0.7300.11401\lib\net461\Tools.Dynamic.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DecomposedItem.cs" />
+    <Compile Include="DecompositionDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DecompositionDialog.Designer.cs">
+      <DependentUpon>DecompositionDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DecompositionEventArgs.cs" />
+    <Compile Include="eColorConstant.cs" />
+    <Compile Include="Exporters\ExporterFactory.cs" />
+    <Compile Include="Exporters\IExporter.cs" />
+    <Compile Include="Exporters\MobiusExporter.cs" />
+    <Compile Include="Exporters\NotepadExporter.cs" />
+    <Compile Include="Json2Tree.cs" />
+    <Compile Include="JTree.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="JTree.Designer.cs">
+      <DependentUpon>JTree.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReplaceValueDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReplaceValueDialog.Designer.cs">
+      <DependentUpon>ReplaceValueDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SearchDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SearchDialog.Designer.cs">
+      <DependentUpon>SearchDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SearchTool.cs" />
+    <Compile Include="TokenDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TokenDialog.Designer.cs">
+      <DependentUpon>TokenDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TokenDTO.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="JsonToTreeView.csproj.nuspec" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="DecompositionDialog.resx">
+      <DependentUpon>DecompositionDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="JTree.resx">
+      <DependentUpon>JTree.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReplaceValueDialog.resx">
+      <DependentUpon>ReplaceValueDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SearchDialog.resx">
+      <DependentUpon>SearchDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TokenDialog.resx">
+      <DependentUpon>TokenDialog.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="JSON.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\JSONPathFinder\TreePathFinder.csproj">
+      <Project>{5f16b619-86a5-4c0b-8fa5-a6fad0f3eb19}</Project>
+      <Name>TreePathFinder</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
