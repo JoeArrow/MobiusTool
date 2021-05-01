@@ -824,7 +824,7 @@ namespace JsonToTreeView
             var scintilla = sender as Scintilla;
 
             lblLine.Text = (scintilla.CurrentLine + 1).ToString();
-            lblColumn.Text = scintilla.GetColumn(scintilla.CurrentPosition + 1).ToString();
+            lblColumn.Text = scintilla.GetColumn(scintilla.CurrentPosition).ToString();
         }
 
         // ------------------------------------------------
