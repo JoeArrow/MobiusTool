@@ -76,9 +76,11 @@ namespace JsonToTreeView
         {
             foreach(TreeNode testNode in node.Nodes)
             {
-                if(testNode.Text.Contains(SearchTerm.Trim()) ||
-                   testNode.Name.Equals(SearchTerm.Trim(), StringComparison.CurrentCultureIgnoreCase) ||
-                   SearchTerm.Equals(testNode.Text.Trim(), StringComparison.CurrentCultureIgnoreCase))
+                // ---------------------------------------------
+                // Check both the Name and the Value for a match
+
+                if(testNode.Text.ToLower().Contains(SearchTerm.ToLower().Trim()) ||
+                   testNode.Name.ToLower().Contains(SearchTerm.ToLower().Trim()))
                 {
                     Nodes.Add(testNode);
                 }

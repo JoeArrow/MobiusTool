@@ -87,6 +87,7 @@
     <Compile Include="JTree.Designer.cs">
       <DependentUpon>JTree.cs</DependentUpon>
     </Compile>
+    <Compile Include="NodeClickedEventArgs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReplaceValueDialog.cs">
       <SubType>Form</SubType>

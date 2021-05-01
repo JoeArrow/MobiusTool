@@ -8,8 +8,6 @@
 
 using System;
 using System.Windows.Forms;
-using System.Collections.Generic;
-using System.Text.RegularExpressions;
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -27,41 +25,6 @@ namespace JsonToTreeView.Test
     public class Json2Tree_UT
     {
         public Json2Tree_UT() { }
-
-        // ------------------------------------------------
-        /// <summary>
-        ///     Gets or sets the test context which provides
-        ///     information about and functionality for the 
-        ///     current test run.
-        ///</summary>
-
-        public TestContext TestContext { set; get; }
-
-        // ------------------------------------------------
-
-        #region Additional test attributes
-#pragma warning disable S125
-        // ------------------------------------------------
-        // You can use the following additional attributes 
-        // as you write your tests:
-        //
-        // Use ClassInitialize to run code before running the first test in the class
-        // [ClassInitialize()]
-        // public static void MyClassInitialize(TestContext testContext) { }
-        //
-        // Use ClassCleanup to run code after all tests in a class have run
-        // [ClassCleanup()]
-        // public static void MyClassCleanup() { }
-        //
-        // Use TestInitialize to run code before running each test 
-        // [TestInitialize()]
-        // public void MyTestInitialize() { }
-        //
-        // Use TestCleanup to run code after each test has run
-        // [TestCleanup()]
-        // public void MyTestCleanup() { }
-#pragma warning restore S125
-        #endregion
 
         // ------------------------------------------------
 
@@ -123,7 +86,6 @@ namespace JsonToTreeView.Test
             // Assert
 
             Assert.AreEqual(nodeCount, tv.Nodes[0].Nodes.Count);
-            //Assert.AreEqual(expected, tv.Nodes[0].Nodes[1].LastNode.Text);
         }
 
         // ------------------------------------------------

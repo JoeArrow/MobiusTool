@@ -17,13 +17,8 @@ namespace JsonToTreeView
 {
     public class Json2Tree
     {
-        private event EventHandler FindEvent;
-        private event EventHandler CopyNodePathEvent;
-        private event EventHandler CopyNodeValueEvent;
-        private event EventHandler ToggleExpansionEvent;
-
-        private TreeView treeView;
-        public SearchTool treeSearch = new SearchTool();
+        private readonly TreeView treeView;
+        private readonly SearchTool treeSearch = new SearchTool();
 
         // ------------------------------------------------
 
@@ -119,24 +114,20 @@ namespace JsonToTreeView
         private ContextMenu BuildNodeMenu(TreeNode node)
         {
             var copyNodeValue = new MenuItem("Copy");
-            CopyNodeValueEvent = OnCopyNodeValue;
-            copyNodeValue.Click += CopyNodeValueEvent;
+            copyNodeValue.Click += OnCopyNodeValue;
             copyNodeValue.Tag = node;
 
             var copyNodeItem = new MenuItem("Copy Node Path");
-            CopyNodePathEvent = OnCopyNodePath;
-            copyNodeItem.Click += CopyNodePathEvent;
+            copyNodeItem.Click += OnCopyNodePath;
             copyNodeItem.Tag = node;
 
             var toggleExpNodeItem = new MenuItem("Toggle Node Expansion");
-            ToggleExpansionEvent = OnToggleExpansion;
             toggleExpNodeItem.Tag = node;
-            toggleExpNodeItem.Click += ToggleExpansionEvent;
+            toggleExpNodeItem.Click += OnToggleExpansion;
 
             var findNode = new MenuItem("Search");
-            FindEvent = OnSearch;
             findNode.Tag = node;
-            findNode.Click += FindEvent;
+            findNode.Click += OnSearch;
 
             var retVal = new ContextMenu(new MenuItem[] { copyNodeValue, findNode, toggleExpNodeItem, copyNodeItem });
 

@@ -42,22 +42,26 @@ namespace JsonToTreeView
         public string[] Constants { set; get; }
         [ExcludeFromCodeCoverage]
         public IExporter Exporter { set; get; }
+
+        public int CurrentLine { get; set; }
+        public int CurrentColumn { get; set; }
+
         [ExcludeFromCodeCoverage]
         private IPathFinder PathFinder { set; get; } = new NodePathFinder();
 
-        public List<JTree> SplitSyncTargets = new List<JTree>();
+        private List<JTree> SplitSyncTargets = new List<JTree>();
         public TreeNode RootNode { get { return tvJSON.Nodes.Count > 0 ? tvJSON.Nodes[0] : null; } }
 
         internal TreeView tvJSON { get { return trvJSON; } }
-        internal Scintilla tbJSON { get { return rtxJSON; } }
-        
+        internal Scintilla tbJSON { get { return sciJSON; } }
+
         // ------------------------------------------------
 
         [ExcludeFromCodeCoverage]
         public string JSON
         {
-            set { rtxJSON.Text = value; }
-            get { return FixupJSON(rtxJSON.Text, false); }
+            set { sciJSON.Text = value; }
+            get { return FixupJSON(sciJSON.Text, false); }
         }
 
         // ------------------------------------------------
@@ -93,10 +97,9 @@ namespace JsonToTreeView
         ///     Default Constructor
         /// </summary>
 
-        public JTree()
+        public JTree() 
         {
             InitializeComponent();
-
             JSONStyle();
             LineNumberStyle();
             CodeFoldingStyle();
@@ -104,7 +107,7 @@ namespace JsonToTreeView
             Constants = new string[0];
             searchTool = new SearchTool(this);
             lblNodesFound.Text = string.Empty;
-            rtxJSON.ContextMenu = BuildJSONContextMenu();
+            sciJSON.ContextMenu = BuildJSONContextMenu();
             Exporter = ExporterFactory.GetExporter("Default");
         }
 
@@ -138,15 +141,15 @@ namespace JsonToTreeView
 
         public void ProcessJSON(string json, string rootName)
         {
-            rtxJSON.Text = json;
-            rtxJSON.Tag = false;
+            sciJSON.Text = json;
+            sciJSON.Tag = false;
             lblNodesFound.Text = string.Empty;
 
             if(FormatJSON(true))
             {
                 try
                 {
-                    BuildTree(JToken.Parse(rtxJSON.Text), rootName);
+                    BuildTree(JToken.Parse(sciJSON.Text), rootName);
                 }
                 catch(Exception exp)
                 {
@@ -159,6 +162,14 @@ namespace JsonToTreeView
 
         public string Tokenize()
         {
+            return JSON.Tokenize(Constants);
+        }
+
+        // ------------------------------------------------
+
+        public string Tokenize(string[] constants)
+        {
+            Constants = constants;
             return JSON.Tokenize(Constants);
         }
 
@@ -183,7 +194,7 @@ namespace JsonToTreeView
 
             if(dlg.ShowDialog() == DialogResult.OK)
             {
-                retVal = FileName = fileName;
+                retVal = Path.GetFileNameWithoutExtension(dlg.FileName);
                 File.WriteAllText(dlg.FileName, JSON);
             }
 
@@ -254,10 +265,7 @@ namespace JsonToTreeView
                     // No recursion necessary
 
                     var val = token.ToString();
-                    var node = new TreeNode(string.IsNullOrEmpty(val) ? "<Not Set>" : val)
-                    {
-                        Tag = token as JValue
-                    };
+                    var node = new TreeNode(string.IsNullOrEmpty(val) ? "<Not Set>" : val) {Tag = token as JValue};
 
                     var childNode = parentNode.Nodes[parentNode.Nodes.Add(node)];
 
@@ -287,10 +295,7 @@ namespace JsonToTreeView
 
                     foreach(var property in obj.Properties())
                     {
-                        var node = new TreeNode(property.Name)
-                        {
-                            Tag = obj
-                        };
+                        var node = new TreeNode(property.Name) {Tag = obj};
 
                         var childNode = parentNode.Nodes[parentNode.Nodes.Add(node)];
 
@@ -319,6 +324,9 @@ namespace JsonToTreeView
 
                         var childNode = parentNode.Nodes[parentNode.Nodes.Add(node)];
 
+                        node.ForeColor = Color.Green;
+                        parentNode.ForeColor = Color.Green;
+
                         childNode.ContextMenu = BuildNodeContextMenu(node);
 
                         // ---------
@@ -340,28 +348,23 @@ namespace JsonToTreeView
         private ContextMenu BuildNodeContextMenu(TreeNode node)
         {
             var copyNodeValue = new MenuItem("Copy");
-            CopyNodeValueEvent = OnCopyNodeValue;
-            copyNodeValue.Click += CopyNodeValueEvent;
+            copyNodeValue.Click += OnCopyNodeValue;
             copyNodeValue.Tag = node;
 
             var findNodeItem = new MenuItem("Search");
-            SearchEvent = OnSearch;
             findNodeItem.Tag = node;
-            findNodeItem.Click += SearchEvent;
+            findNodeItem.Click += OnSearch;
 
             var toggleExpNodeItem = new MenuItem("Toggle Node Expansion");
-            ToggleExpansionEvent = OnToggleExpansion;
             toggleExpNodeItem.Tag = node;
-            toggleExpNodeItem.Click += ToggleExpansionEvent;
+            toggleExpNodeItem.Click += OnToggleExpansion;
 
             var copyNodeItem = new MenuItem("Copy Node Path");
-            CopyNodePathEvent = OnCopyNodePath;
-            copyNodeItem.Click += CopyNodePathEvent;
+            copyNodeItem.Click += OnCopyNodePath;
             copyNodeItem.Tag = node;
 
             var copyArrayItem = new MenuItem("Copy Array Path");
-            CopyArrayPathEvent = OnCopyArrayPath;
-            copyArrayItem.Click += CopyArrayPathEvent;
+            copyArrayItem.Click += OnCopyArrayPath;
             copyArrayItem.Tag = node;
 
             var CopyPathMenuItem = new MenuItem("Copy Path");
@@ -369,13 +372,11 @@ namespace JsonToTreeView
             CopyPathMenuItem.MenuItems.Add(copyArrayItem);
 
             var decomposeNodeItem = new MenuItem("Decompose Node");
-            DecomposeNodeEvent = OnDecomposeNode;
             decomposeNodeItem.Tag = node;
-            decomposeNodeItem.Click += DecomposeNodeEvent;
+            decomposeNodeItem.Click += OnDecomposeNode;
 
             var listTokensNode = new MenuItem("List Tokens");
-            ListTokensEvent = OnListTokens;
-            listTokensNode.Click += ListTokensEvent;
+            listTokensNode.Click += OnListTokens;
 
             return new ContextMenu(new MenuItem[] 
             { 
@@ -396,37 +397,29 @@ namespace JsonToTreeView
 
         private ContextMenu BuildJSONContextMenu()
         {
-            var searchFromJSONItem = new MenuItem("Search");
-            SearchTreeEvent = OnJSONSearch;
-            searchFromJSONItem.Click += SearchTreeEvent;
-
-            var copyItem = new MenuItem("Copy Selected Text");
-            CopySelectedEvent = OnCopySelected;
-            copyItem.Click += CopySelectedEvent;
-
-            var formatJsonItem = new MenuItem("Toggle JSON Format");
-            FormatJSONEvent = OnFormatJSON;
-            formatJsonItem.Click += FormatJSONEvent;
-
             var newJsonItem = new MenuItem("New JSON");
-            NewJSONEvent = OnNewJSON;
-            newJsonItem.Click += NewJSONEvent;
+            newJsonItem.Click += OnNewJSON;
 
             var buildItem = new MenuItem("Build The Tree");
-            BuildTreeEvent = OnBuildTree;
-            buildItem.Click += BuildTreeEvent;
-
-            var replaceValueItem = new MenuItem("Replace Value");
-            ReplaceValueEvent = OnReplaceValue;
-            replaceValueItem.Click += ReplaceValueEvent;
+            buildItem.Click += OnBuildTree;
 
             var fixupJSONItem = new MenuItem("Fixup JSON");
-            FixupJsonEvent = OnFixupJSON;
-            fixupJSONItem.Click += FixupJsonEvent;
+            fixupJSONItem.Click += OnFixupJSON;
+
+            var searchFromJSONItem = new MenuItem("Search");
+            searchFromJSONItem.Click += OnJSONSearch;
 
             var listTokensNode = new MenuItem("List Tokens");
-            ListTokensEvent = OnListTokens;
-            listTokensNode.Click += ListTokensEvent;
+            listTokensNode.Click += OnListTokens;
+
+            var copyItem = new MenuItem("Copy Selected Text");
+            copyItem.Click += OnCopySelected;
+
+            var replaceValueItem = new MenuItem("Replace Value");
+            replaceValueItem.Click += OnReplaceValue;
+
+            var formatJsonItem = new MenuItem("Toggle JSON Format");
+            formatJsonItem.Click += OnFormatJSON;
 
             var retVal = new ContextMenu(new MenuItem[] 
             { 
@@ -497,13 +490,13 @@ namespace JsonToTreeView
             // If text is selected, use the selection,
             // otherwise use the full text
 
-            if(string.IsNullOrEmpty(rtxJSON.SelectedText))
+            if(string.IsNullOrEmpty(sciJSON.SelectedText))
             {
-                json = rtxJSON.Text;
+                json = sciJSON.Text;
             }
             else
             {
-                json = rtxJSON.SelectedText;                
+                json = sciJSON.SelectedText;                
             }
 
             if(!string.IsNullOrEmpty(json))
@@ -527,11 +520,18 @@ namespace JsonToTreeView
 
         // ------------------------------------------------
 
+        public void NewJSON()
+        {
+            OnNewJSON(null, null);
+        }
+
+        // ------------------------------------------------
+
         [ExcludeFromCodeCoverage]
         private void PasteText()
         {
             trvJSON.Nodes.Clear();
-            ProcessJSON(rtxJSON.Text, "json");
+            ProcessJSON(sciJSON.Text, "json");
         }
 
         // ------------------------------------------------
@@ -612,9 +612,9 @@ namespace JsonToTreeView
         [ExcludeFromCodeCoverage]
         private void OnJSONSearch(object sender, EventArgs e)
         {
-            if(!string.IsNullOrEmpty(rtxJSON.SelectedText))
+            if(!string.IsNullOrEmpty(sciJSON.SelectedText))
             {
-                lblNodesFound.Text = $"Found: {searchTool.Search(trvJSON.Nodes[0], rtxJSON.SelectedText)}";
+                lblNodesFound.Text = $"Found: {searchTool.Search(trvJSON.Nodes[0], sciJSON.SelectedText)}";
             }
         }
 
@@ -665,6 +665,24 @@ namespace JsonToTreeView
         // ------------------------------------------------
 
         [ExcludeFromCodeCoverage]
+        private void OnNodeClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            NodeClickedEvent?.Invoke(this, new NodeClickedEventArgs(e.Node.FullPath));
+        }
+
+        // ------------------------------------------------
+
+        private void OnNodeDoubleClick(object sender, MouseEventArgs e)
+        {
+            //var tree = sender as TreeView;
+            //var node = tree.SelectedNode;
+
+            //searchTool.Search(node, node.Text);
+        }
+
+        // ------------------------------------------------
+
+        [ExcludeFromCodeCoverage]
         private void OnSearch(object sender, EventArgs e)
         {
             var item = sender as MenuItem;
@@ -680,10 +698,9 @@ namespace JsonToTreeView
         [ExcludeFromCodeCoverage]
         private void OnListTokens(object sender, EventArgs e)
         {
-            var sb = new StringBuilder();
             var r = new Regex("{{\\w+}}");
 
-            var matches = r.Matches(rtxJSON.Text);
+            var matches = r.Matches(sciJSON.Text);
             var tokens = new List<string>();
 
             foreach(var match in matches)
@@ -717,9 +734,9 @@ namespace JsonToTreeView
         [ExcludeFromCodeCoverage]
         private void OnCopySelected(object sender, EventArgs e)
         {
-            if(!string.IsNullOrEmpty(rtxJSON.SelectedText))
+            if(!string.IsNullOrEmpty(sciJSON.SelectedText))
             {
-                Clipboard.SetText(rtxJSON.SelectedText);
+                Clipboard.SetText(sciJSON.SelectedText);
             }
         }
 
@@ -728,7 +745,7 @@ namespace JsonToTreeView
         [ExcludeFromCodeCoverage]
         private void OnBuildTree(object sender, EventArgs e)
         {
-            ProcessJSON(rtxJSON.Text, "json");
+            ProcessJSON(sciJSON.Text, "json");
         }
 
         // ------------------------------------------------
@@ -736,7 +753,7 @@ namespace JsonToTreeView
         [ExcludeFromCodeCoverage]
         private void OnFormatJSON(object sender, EventArgs e)
         {
-            FormatJSON(!(bool)rtxJSON.Tag);
+            FormatJSON(!(bool)sciJSON.Tag);
         }
 
         // ------------------------------------------------
@@ -744,7 +761,7 @@ namespace JsonToTreeView
         [ExcludeFromCodeCoverage]
         private void OnReplaceValue(object sender, EventArgs e)
         {
-            var searchTerm = rtxJSON.SelectedText;
+            var searchTerm = sciJSON.SelectedText;
 
             using(var dlg = new ReplaceValueDialog(searchTerm))
             {
@@ -756,9 +773,9 @@ namespace JsonToTreeView
                     searchTerm = dlg.SearchValue;
                     var replacementTerm = dlg.NewValue;
 
-                    rtxJSON.Text = rtxJSON.Text.Replace(searchTerm, replacementTerm);
+                    sciJSON.Text = sciJSON.Text.Replace(searchTerm, replacementTerm);
 
-                    ProcessJSON(rtxJSON.Text, "json");
+                    ProcessJSON(sciJSON.Text, "json");
                 }
             }
         }
@@ -768,10 +785,10 @@ namespace JsonToTreeView
         [ExcludeFromCodeCoverage]
         private void OnNewJSON(object sender, EventArgs e)
         {
-            if(string.IsNullOrEmpty(rtxJSON.Text))
+            if(string.IsNullOrEmpty(sciJSON.Text))
             {
                 trvJSON.Nodes.Clear();
-                rtxJSON.Text = "{  }";
+                sciJSON.Text = "{  }";
             }
             else
             {
@@ -784,13 +801,13 @@ namespace JsonToTreeView
                         SaveJSON();
 
                         trvJSON.Nodes.Clear();
-                        rtxJSON.Text = "{  }";
+                        sciJSON.Text = "{  }";
                         break;
 
                     case DialogResult.No:
 
                         trvJSON.Nodes.Clear();
-                        rtxJSON.Text = "{  }";
+                        sciJSON.Text = "{  }";
                         break;
 
                     default:
@@ -802,18 +819,28 @@ namespace JsonToTreeView
 
         // ------------------------------------------------
 
+        private void OnCaretPositionChange(object sender, UpdateUIEventArgs e)
+        {
+            var scintilla = sender as Scintilla;
+
+            lblLine.Text = (scintilla.CurrentLine + 1).ToString();
+            lblColumn.Text = scintilla.GetColumn(scintilla.CurrentPosition + 1).ToString();
+        }
+
+        // ------------------------------------------------
+
         private bool FormatJSON(bool pretty)
         {
-            var retVal = false;
-            rtxJSON.Tag = pretty;
+            bool retVal;
+            sciJSON.Tag = pretty;
             var token = null as JToken;
 
-            rtxJSON.ScrollWidth = 1;
-            rtxJSON.ScrollWidthTracking = true;
+            sciJSON.ScrollWidth = 1;
+            sciJSON.ScrollWidthTracking = true;
 
             try
             {
-                token = JToken.Parse(rtxJSON.Text);
+                token = JToken.Parse(sciJSON.Text);
                 retVal = true;
             }
             catch(Exception exp)
@@ -826,7 +853,19 @@ namespace JsonToTreeView
 
             if(retVal)
             {
-                rtxJSON.Text = token.ToString(pretty ? Formatting.Indented : Formatting.None);
+                var json = token.ToString(pretty ? Formatting.Indented : Formatting.None);
+
+                if(pretty)
+                {
+                    sciJSON.Text = json;
+                    BuildTree(JToken.Parse(json), "json");
+                }
+                else
+                {
+                    sciJSON.Text = json.Replace("\"'", "'")
+                                       .Replace("'\"", "'")
+                                       .Replace("\"", "'");
+                }
             }
 
             return retVal;
@@ -969,8 +1008,8 @@ namespace JsonToTreeView
                 // --------------------------------
                 // Remove all uses of our indicator
 
-                rtxJSON.IndicatorCurrent = HIGHLIGHT;
-                rtxJSON.IndicatorClearRange(0, rtxJSON.TextLength);
+                sciJSON.IndicatorCurrent = HIGHLIGHT;
+                sciJSON.IndicatorClearRange(0, sciJSON.TextLength);
             }
             else if(e.KeyData == (Keys.Control | Keys.C))
             {
@@ -993,7 +1032,7 @@ namespace JsonToTreeView
         [ExcludeFromCodeCoverage]
         private void OnJSONTextChange(object sender, EventArgs e)
         {
-            if(string.IsNullOrEmpty(rtxJSON.Text))
+            if(string.IsNullOrEmpty(sciJSON.Text))
             {
                 trvJSON.Nodes.Clear();
             }
@@ -1002,7 +1041,7 @@ namespace JsonToTreeView
             // Did the number of characters in the line number display change?
             // i.e. nnn VS nn, or nnnn VS nn, etc...
 
-            var columnWidth = rtxJSON.Lines.Count.ToString().Length;
+            var columnWidth = sciJSON.Lines.Count.ToString().Length;
 
             if(columnWidth != maxLineNumberwidth)
             {
@@ -1014,7 +1053,7 @@ namespace JsonToTreeView
 
                 const int paddingLeft = 2;
 
-                rtxJSON.Margins[LINENUMBER_MARGIN].Width = rtxJSON.TextWidth(Style.LineNumber, new string('9', maxLineNumberwidth + paddingLeft));
+                sciJSON.Margins[LINENUMBER_MARGIN].Width = sciJSON.TextWidth(Style.LineNumber, new string('9', maxLineNumberwidth + paddingLeft));
             }
         }
     }
