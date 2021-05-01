@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="InitialPath" Type="System.String" Scope="User">
-      <Value Profile="(Default)">C:\Usage\SLI-Defects\Defect 290</Value>
+      <Value Profile="(Default)">C:\Usage\_Source\GBFP\Automated Tests\Postman\Collections\SLI</Value>
     </Setting>
     <Setting Name="WordWrap" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
@@ -24,16 +24,19 @@
       <Value Profile="(Default)">Mobius</Value>
     </Setting>
     <Setting Name="Size" Type="System.Drawing.Size" Scope="User">
-      <Value Profile="(Default)">1002, 1002</Value>
+      <Value Profile="(Default)">1002, 600</Value>
     </Setting>
     <Setting Name="Location" Type="System.Drawing.Point" Scope="User">
-      <Value Profile="(Default)">200, 50</Value>
+      <Value Profile="(Default)">300, 100</Value>
     </Setting>
     <Setting Name="ConstExtension" Type="System.String" Scope="User">
       <Value Profile="(Default)">const</Value>
     </Setting>
     <Setting Name="ConstantsPath" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="DefaultPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\</Value>
     </Setting>
   </Settings>
 </SettingsFile>

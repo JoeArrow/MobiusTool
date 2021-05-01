@@ -25,7 +25,7 @@ namespace JSON_Formatter.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Usage\\SLI-Defects\\Defect 290")]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Usage\\_Source\\GBFP\\Automated Tests\\Postman\\Collections\\SLI")]
         public string InitialPath {
             get {
                 return ((string)(this["InitialPath"]));
@@ -109,7 +109,7 @@ namespace JSON_Formatter.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1002, 1002")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1002, 600")]
         public global::System.Drawing.Size Size {
             get {
                 return ((global::System.Drawing.Size)(this["Size"]));
@@ -121,7 +121,7 @@ namespace JSON_Formatter.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("200, 50")]
+        [global::System.Configuration.DefaultSettingValueAttribute("300, 100")]
         public global::System.Drawing.Point Location {
             get {
                 return ((global::System.Drawing.Point)(this["Location"]));
@@ -152,6 +152,18 @@ namespace JSON_Formatter.Properties {
             }
             set {
                 this["ConstantsPath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\")]
+        public string DefaultPath {
+            get {
+                return ((string)(this["DefaultPath"]));
+            }
+            set {
+                this["DefaultPath"] = value;
             }
         }
     }

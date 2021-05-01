@@ -29,7 +29,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>65</ApplicationRevision>
+    <ApplicationRevision>77</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -55,7 +55,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>37FAD4190F83DD0501E993048B42EA50D9352E70</ManifestCertificateThumbprint>
@@ -119,6 +119,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="TabRenameDialog.resx">
       <DependentUpon>TabRenameDialog.cs</DependentUpon>
@@ -139,6 +140,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Images\Close.png" />
+    <Content Include="Images\Mobius Strip.jpg" />
+    <Content Include="Images\Rebuild.png" />
     <Content Include="JSON.ico" />
   </ItemGroup>
   <ItemGroup>

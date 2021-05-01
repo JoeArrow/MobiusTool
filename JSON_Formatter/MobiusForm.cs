@@ -19,7 +19,6 @@ using Newtonsoft.Json.Linq;
 using JsonToTreeView;
 using AboutJoeWare_Lib;
 using JsonToTreeView.Exporters;
-using System.Drawing;
 
 namespace JSON_Formatter
 {
@@ -35,6 +34,11 @@ namespace JSON_Formatter
             tbFileName.Text = Properties.Settings.Default.InitialPath;
             jTree.LoadExpanded = Properties.Settings.Default.LoadExpanded;
 
+            if(!Directory.Exists(tbFileName.Text)) { tbFileName.Text = Properties.Settings.Default.DefaultPath; }
+
+            tcTabs.TabAddedEvent += OnTabAdded;
+
+            jTree.NodeClickedEvent += OnNodeClicked;
             jTree.DecompositionExportedEvent += OnDataDecomposition;
         }
 
@@ -43,16 +47,26 @@ namespace JSON_Formatter
         public MobiusForm(string fileName)
             : this()
         {
-            tbFileName.Text = fileName;
+            LoadFile(fileName);
+        }
 
+        // ------------------------------------------------
+
+        public void LoadFile(string fileName)
+        {
             Cursor = Cursors.WaitCursor;
+
+            LoadConstants(fileName);
+            tcTabs.SelectedTab.Tag = Path.GetFileName(fileName);
+            tcTabs.SelectedTab.Text = Path.GetFileNameWithoutExtension(fileName);
+            tbFileName.Text = fileName;
 
             // ----------------------------------
             // Load the JSON, and then format it.
 
-            using(var streamReader = File.OpenText(tbFileName.Text))
+            using(var streamReader = File.OpenText(fileName))
             {
-                jTree.ProcessJSON(streamReader.ReadToEnd(), "json");
+                ((JTree)tcTabs.SelectedTab.Controls[0]).ProcessJSON(streamReader.ReadToEnd(), "json");
             }
 
             Cursor = Cursors.Default;
@@ -107,24 +121,10 @@ namespace JSON_Formatter
 
             if(dlg.ShowDialog() == DialogResult.OK)
             {
-                Cursor = Cursors.WaitCursor;
-
-                LoadConstants(dlg.FileName);
-                tcTabs.SelectedTab.Tag = Path.GetFileName(dlg.FileName);
-                tbFileName.Text = dlg.FileName.Length > 80 ? Path.GetFileName(dlg.FileName) : dlg.FileName;
+                LoadFile(dlg.FileName);
 
                 Properties.Settings.Default.InitialPath = Path.GetDirectoryName(dlg.FileName);
                 Properties.Settings.Default.Save();
-
-                // ----------------------------------
-                // Load the JSON, and then format it.
-
-                using(var streamReader = File.OpenText(dlg.FileName))
-                {
-                    ((JTree)tcTabs.SelectedTab.Controls[0]).ProcessJSON(streamReader.ReadToEnd(), "json");
-                }
-
-                Cursor = Cursors.Default;
             }
         }
 
@@ -132,8 +132,6 @@ namespace JSON_Formatter
 
         private void LoadConstants(string fullName)
         {
-            var retVal = new List<string>();
-
             var ser = new JavaScriptSerializer();
             var path = Path.GetDirectoryName(fullName);
             var ext = Properties.Settings.Default.ConstExtension;
@@ -158,7 +156,17 @@ namespace JSON_Formatter
         private void OnSave(object sender, EventArgs e)
         {
             var jtree = tcTabs.SelectedTab.Controls[0] as JTree;
-            tbFileName.Text = jtree.SaveJSON(tbFileName.Text);
+
+            if(!string.IsNullOrEmpty(jtree.JSON))
+            {
+                var fileName = jtree.SaveJSON(tbFileName.Text);
+
+                if(!string.IsNullOrEmpty(fileName))
+                {
+                    tcTabs.SelectedTab.Text = Path.GetFileNameWithoutExtension(fileName);
+                    tbFileName.Text = fileName;
+                }
+            }
         }
 
         // ------------------------------------------------
@@ -181,6 +189,34 @@ namespace JSON_Formatter
             {
                 jTree = tcTabs.AddTab(args.DecomposedData, "Decomposed Node");
                 jTree.ProcessJSON(args.DecomposedData, "json");
+            }
+        }
+
+        // ------------------------------------------------
+
+        private void OnNodeClicked(object sender, EventArgs e)
+        {
+            var args = e as NodeClickedEventArgs;
+
+            if(args != null && !string.IsNullOrEmpty(args.NodePath))
+            {
+                lblNodePath.Text = args.NodePath;
+            }
+        }
+
+        // ------------------------------------------------
+
+        private void OnTabAdded(object sender, EventArgs e)
+        {
+            var jtree = sender as JTree;
+
+            if(jtree != null)
+            {
+                jtree.AllowDrop = true;
+                jtree.NodeClickedEvent += OnNodeClicked;
+                jtree.DragDrop += new DragEventHandler(OnDragDrop);
+                jtree.DragEnter += new DragEventHandler(OnDragEnter);
+                jtree.DecompositionExportedEvent += OnDataDecomposition;
             }
         }
 
@@ -231,6 +267,7 @@ namespace JSON_Formatter
             if(fileNames.Length > 0)
             {
                 tbFileName.Text = fileNames[0];
+                tcTabs.SelectedTab.Text = Path.GetFileNameWithoutExtension(tbFileName.Text);
 
                 Cursor = Cursors.WaitCursor;
 
@@ -239,7 +276,7 @@ namespace JSON_Formatter
 
                 using(var streamReader = File.OpenText(tbFileName.Text))
                 {
-                    jTree.ProcessJSON(streamReader.ReadToEnd(), "json");
+                    ((JTree)tcTabs.SelectedTab.Controls[0]).ProcessJSON(streamReader.ReadToEnd(), "json");
                 }
 
                 Cursor = Cursors.Default;
@@ -250,7 +287,7 @@ namespace JSON_Formatter
 
         private void OnTokenizeJSON(object sender, EventArgs e)
         {
-            var jTree = (JTree)tcTabs.SelectedTab.Controls[0];
+            jTree = (JTree)tcTabs.SelectedTab.Controls[0];
 
             if(string.IsNullOrEmpty(jTree.JSON))
             {
@@ -270,7 +307,8 @@ namespace JSON_Formatter
                 catch(Exception exp)
                 {
                     var cr = Environment.NewLine;
-                    MessageBox.Show($"{exp.Message}{cr}{cr}Please make sure that there are no Tokens already in the JSON text.", "Failed to Parse JSON");
+                    MessageBox.Show($"{exp.Message}{cr}{cr}Please make sure that there are no Tokens already in the JSON text.", 
+                                     "Failed to Parse JSON");
                 }
                 finally
                 {
@@ -346,10 +384,10 @@ namespace JSON_Formatter
 
         private List<string> GetProperties(JToken token)
         {
-            var retVal = new List<string>();
             var obj = token as JObject;
             var array = token as JArray;
             var prop = token as JProperty;
+            var retVal = new List<string>();
 
             if(obj != null)
             {
@@ -369,10 +407,7 @@ namespace JSON_Formatter
             }
             else if(prop != null)
             {
-                if(prop != null)
-                {
-                    retVal.AddRange(GetProperties(prop.Value));
-                }
+                retVal.AddRange(GetProperties(prop.Value));
             }
             else if(array != null)
             {
@@ -399,6 +434,25 @@ namespace JSON_Formatter
             }
 
             Properties.Settings.Default.Save();
+        }
+
+        // ------------------------------------------------
+
+        private void OnNewJSON(object sender, EventArgs e)
+        {
+            tcTabs.AddTab("{ }", "JSON Tab");
+        }
+
+        // ------------------------------------------------
+
+        private void OnNodePathLabelClick(object sender, MouseEventArgs e)
+        {
+            var label = sender as Label;
+
+            if(label != null)
+            {
+                Clipboard.SetText(label.Text);
+            }
         }
     }
 }

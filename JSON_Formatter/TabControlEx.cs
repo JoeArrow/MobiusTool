@@ -25,6 +25,11 @@ namespace JSON_Formatter
         private const int MIN_PAGES = 2;
 
         private bool MovingATab = false;
+
+        // ---------
+        // Events...
+
+        public event EventHandler TabAddedEvent;
         private event EventHandler TabRenameEvent;
         private event EventHandler TabDeleteEvent;
 
@@ -64,12 +69,16 @@ namespace JSON_Formatter
 
         // ------------------------------------------------
 
-        public void AddTab()
+        public JTree AddTab()
         {
+            var retVal = null as JTree;
+
             if(SelectedTab != null && SelectedTab.Text.Equals("New Tab"))
             {
-                AddTab("", $"{Properties.Settings.Default.DefaultTabText} {TabCount.ToString()}");
+                retVal = AddTab("", $"{Properties.Settings.Default.DefaultTabText} {TabCount.ToString()}");
             }
+
+            return retVal;
         }
 
         // ------------------------------------------------
@@ -90,6 +99,8 @@ namespace JSON_Formatter
             });
 
             var retVal = SelectedTab.Controls[0] as JTree;
+            TabAddedEvent?.Invoke(retVal, new EventArgs());
+
             retVal.JSON = json;
 
             return SelectedTab.Controls[0] as JTree;
@@ -126,6 +137,7 @@ namespace JSON_Formatter
         private void OnMouseDown(object sender, MouseEventArgs e)
         {
             SetCurrentTab(e);
+            var clickPoint = e.Location;
 
             if(CurrentTab.Text.Equals("New Tab", StringComparison.CurrentCultureIgnoreCase))
             {
@@ -133,7 +145,6 @@ namespace JSON_Formatter
             }
             else
             {
-                var clickPoint = e.Location;
                 var currentIndex = TabPages.IndexOf(CurrentTab);
                 var rectangle = GetTabRect(currentIndex);
 
@@ -145,9 +156,6 @@ namespace JSON_Formatter
 
                 if(clickedTheX)
                 {
-                    // -----------------
-                    // Deleting a Tab...
-
                     if(TabCount > MIN_PAGES)
                     {
                         TabPages.RemoveAt(currentIndex);
@@ -204,7 +212,7 @@ namespace JSON_Formatter
                     var sourceIndex = TabPages.IndexOf(SourceTab);
                     var currentIndex = TabPages.IndexOf(CurrentTab);
 
-                    if(sourceIndex != currentIndex && 
+                    if(sourceIndex != currentIndex &&
                        currentIndex < TabPages.Count - 1)
                     {
                         TabPages.Remove(SourceTab);
@@ -213,6 +221,7 @@ namespace JSON_Formatter
                 }
             }
         }
+
 
         // ------------------------------------------------
 

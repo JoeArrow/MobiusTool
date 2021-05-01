@@ -26,6 +26,9 @@ namespace JsonToTreeView.Test
     [TestClass]
     public class JTree_UT
     {
+        private readonly string cr = $"{Environment.NewLine}";
+        private readonly string crt = $"{Environment.NewLine}\t";
+
         public JTree_UT() { }
 
         // ------------------------------------------------
@@ -72,9 +75,6 @@ namespace JsonToTreeView.Test
             // -------
             // Arrange
 
-            var cr = $"{Environment.NewLine}";
-            var crt = $"{Environment.NewLine}\t";
-
             var sut = new JTree();
 
             // ---
@@ -114,9 +114,6 @@ namespace JsonToTreeView.Test
             // -------
             // Arrange
 
-            var cr = $"{Environment.NewLine}";
-            var crt = $"{Environment.NewLine}\t";
-
             var sut = new JTree(input);
 
             var privateObj = new PrivateObject(sut);
@@ -155,8 +152,6 @@ namespace JsonToTreeView.Test
             // -------
             // Arrange
 
-            var cr = $"{Environment.NewLine}";
-            var crt = $"{Environment.NewLine}\t";
             var json = Regex.Replace(input, @"\s+", "");
             expected = Regex.Replace(expected, @"\s+", "");
 
@@ -173,12 +168,13 @@ namespace JsonToTreeView.Test
             // Act
 
             po.Invoke("CopyText", null);
-            var res = Regex.Replace(Clipboard.GetText(), @"\s+", "").Replace('\"', '\'');
+            var clipBoardText = Clipboard.GetText();
+            var res = Regex.Replace(clipBoardText, @"\s+", "").Replace('\"', '\'');
 
             // ---
             // Log
 
-            Console.WriteLine($"Output:   {res}{cr}Expected: {expected}");
+            Console.WriteLine($"Output:    {res}{cr}Expected: {expected}");
 
             // ------
             // Assert
@@ -197,13 +193,7 @@ namespace JsonToTreeView.Test
             // -------
             // Arrange
 
-            var cr = $"{Environment.NewLine}";
-            var crt = $"{Environment.NewLine}\t";
-
             var sut = new JTree(json);
-            var args = new object[] { pretty };
-
-            var privateObj = new PrivateObject(sut);
 
             // ---
             // Log
@@ -213,7 +203,6 @@ namespace JsonToTreeView.Test
             // ---
             // Act
 
-            //var res = privateObj.Invoke("FormatJSON", args);
             var resp = sut.JSON;
 
             // ---
