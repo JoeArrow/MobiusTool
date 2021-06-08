@@ -68,10 +68,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AboutJoeWare_Lib, Version=1.0.6334.12939, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AboutJoeWare_Lib.1.0.6334.12939\lib\net451\AboutJoeWare_Lib.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\AboutJoeWare_Lib.dll</HintPath>
     </Reference>
     <Reference Include="JSON.String.Extensions, Version=1.0.7277.11637, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\JSON.String.Extensions.1.0.7277.11637\lib\net472\JSON.String.Extensions.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\JSON.String.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
