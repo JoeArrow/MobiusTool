@@ -9,7 +9,7 @@
 using System;
 using System.Windows.Forms;
 
-using Aflac.Sortable;
+using JWSortable;
 
 namespace JsonToTreeView
 {

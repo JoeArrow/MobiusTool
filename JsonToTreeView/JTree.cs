@@ -21,7 +21,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 using ScintillaNET;
-using Aflac.Sortable;
+using JWSortable;
 using TreePathFinder;
 using JSON.String.Extensions;
 using JsonToTreeView.Exporters;

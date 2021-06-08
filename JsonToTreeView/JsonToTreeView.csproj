@@ -38,11 +38,12 @@
     <ApplicationIcon>JSON.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AflacSortable, Version=1.0.6232.28381, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AflacSortable.1.0.6232.28381\lib\net45\AflacSortable.dll</HintPath>
-    </Reference>
     <Reference Include="JSON.String.Extensions, Version=1.0.7277.11637, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\JSON.String.Extensions.1.0.7277.11637\lib\net472\JSON.String.Extensions.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\JSON.String.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="JWSortable">
+      <HintPath>..\Lib\JWSortable.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -63,7 +64,8 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
     <Reference Include="Tools.Dynamic, Version=1.0.7300.11401, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Tools.Dynamic.1.0.7300.11401\lib\net461\Tools.Dynamic.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\Tools.Dynamic.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

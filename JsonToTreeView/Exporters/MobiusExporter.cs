@@ -10,7 +10,7 @@ using System;
 using System.Web.Script.Serialization;
 
 using Tools.Dynamic;
-using Aflac.Sortable;
+using JWSortable;
 
 namespace JsonToTreeView.Exporters
 {

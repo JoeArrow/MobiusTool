@@ -12,7 +12,7 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Web.Script.Serialization;
 
-using Aflac.Sortable;
+using JWSortable;
 using Tools.Dynamic;
 
 namespace JsonToTreeView.Exporters

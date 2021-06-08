@@ -18,6 +18,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TreePathFinder.Test", "TreePathFinder.Test\TreePathFinder.Test.csproj", "{1A3C2C22-BEF4-4185-BCF4-78C3A1DD73B1}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lib", "Lib", "{D8D245B8-8526-4F3C-8EE2-D3696142C4D4}"
+	ProjectSection(SolutionItems) = preProject
+		Lib\AboutJoeWare_Lib.dll = Lib\AboutJoeWare_Lib.dll
+		Lib\JSON.String.Extensions.dll = Lib\JSON.String.Extensions.dll
+		Lib\JsonToTreeView.dll = Lib\JsonToTreeView.dll
+		Lib\JWSortable.dll = Lib\JWSortable.dll
+		Lib\ScintillaNET.dll = Lib\ScintillaNET.dll
+		Lib\Tools.Dynamic.dll = Lib\Tools.Dynamic.dll
+		Lib\TreePathFinder.dll = Lib\TreePathFinder.dll
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -50,26 +61,5 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9131D88C-EACB-4932-8799-EF7148E3DD86}
-	EndGlobalSection
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 6
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://tfs.aflac.com:8080/tfs/globalcollection
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = JsonToTreeView\\JsonToTreeView.csproj
-		SccProjectName1 = JsonToTreeView
-		SccLocalPath1 = JsonToTreeView
-		SccProjectUniqueName2 = JsonToTreeView.Test\\JsonToTreeView.Test.csproj
-		SccProjectName2 = JsonToTreeView.Test
-		SccLocalPath2 = JsonToTreeView.Test
-		SccProjectUniqueName3 = JSONPathFinder\\TreePathFinder.csproj
-		SccProjectName3 = JSONPathFinder
-		SccLocalPath3 = JSONPathFinder
-		SccProjectUniqueName4 = JSON_Formatter\\Mobius.csproj
-		SccProjectName4 = JSON_Formatter
-		SccLocalPath4 = JSON_Formatter
-		SccProjectUniqueName5 = TreePathFinder.Test\\TreePathFinder.Test.csproj
-		SccProjectName5 = TreePathFinder.Test
-		SccLocalPath5 = TreePathFinder.Test
 	EndGlobalSection
 EndGlobal
