@@ -531,7 +531,7 @@ namespace JsonToTreeView
         private void PasteText()
         {
             trvJSON.Nodes.Clear();
-            ProcessJSON(sciJSON.Text, "json");
+            //ProcessJSON(sciJSON.Text, "json");
         }
 
         // ------------------------------------------------
