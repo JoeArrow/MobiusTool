@@ -382,6 +382,41 @@ namespace JSON_Formatter
 
         // ------------------------------------------------
 
+        private void OnFormClose(object sender, FormClosingEventArgs e)
+        {
+            Properties.Settings.Default.Size = Size;
+            Properties.Settings.Default.Location = Location;
+            Properties.Settings.Default.LoadExpanded = jTree.LoadExpanded;
+
+            if (!string.IsNullOrEmpty(tbFileName.Text))
+            {
+                Properties.Settings.Default.InitialPath = Path.GetDirectoryName(tbFileName.Text);
+            }
+
+            Properties.Settings.Default.Save();
+        }
+
+        // ------------------------------------------------
+
+        private void OnNewJSON(object sender, EventArgs e)
+        {
+            tcTabs.AddTab("{ }", "JSON Tab");
+        }
+
+        // ------------------------------------------------
+
+        private void OnNodePathLabelClick(object sender, MouseEventArgs e)
+        {
+            var label = sender as Label;
+
+            if (label != null)
+            {
+                Clipboard.SetText(label.Text);
+            }
+        }
+
+        // ------------------------------------------------
+
         private List<string> GetProperties(JToken token)
         {
             var obj = token as JObject;
@@ -418,41 +453,6 @@ namespace JSON_Formatter
             }
 
             return retVal;
-        }
-
-        // ------------------------------------------------
-
-        private void OnFormClose(object sender, FormClosingEventArgs e)
-        {
-            Properties.Settings.Default.Size = Size;
-            Properties.Settings.Default.Location = Location;
-            Properties.Settings.Default.LoadExpanded = jTree.LoadExpanded;
-
-            if(!string.IsNullOrEmpty(tbFileName.Text))
-            {
-                Properties.Settings.Default.InitialPath = Path.GetDirectoryName(tbFileName.Text);
-            }
-
-            Properties.Settings.Default.Save();
-        }
-
-        // ------------------------------------------------
-
-        private void OnNewJSON(object sender, EventArgs e)
-        {
-            tcTabs.AddTab("{ }", "JSON Tab");
-        }
-
-        // ------------------------------------------------
-
-        private void OnNodePathLabelClick(object sender, MouseEventArgs e)
-        {
-            var label = sender as Label;
-
-            if(label != null)
-            {
-                Clipboard.SetText(label.Text);
-            }
         }
     }
 }

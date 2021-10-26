@@ -76,7 +76,7 @@ namespace JsonToTreeView
         // ------------------------------------------------
 
         [ExcludeFromCodeCoverage]
-        public bool LoadExpanded 
+        public bool LoadExpanded
         {
             set { cbExpand.Checked = value; }
             get { return cbExpand.Checked; }
@@ -97,7 +97,7 @@ namespace JsonToTreeView
         ///     Default Constructor
         /// </summary>
 
-        public JTree() 
+        public JTree()
         {
             InitializeComponent();
             JSONStyle();
@@ -119,7 +119,7 @@ namespace JsonToTreeView
         /// <param name="json"></param>
         /// <param name="rootName"></param>
 
-        public JTree(string json, string rootName = "json") 
+        public JTree(string json, string rootName = "json")
             : this()
         {
             ProcessJSON(json, rootName);
@@ -187,7 +187,7 @@ namespace JsonToTreeView
 
             var dlg = new SaveFileDialog()
             {
-                FileName = fileName, 
+                FileName = fileName,
                 OverwritePrompt = false,
                 Filter = ConfigurationManager.AppSettings["SearchFilter"]
             };
@@ -265,7 +265,7 @@ namespace JsonToTreeView
                     // No recursion necessary
 
                     var val = token.ToString();
-                    var node = new TreeNode(string.IsNullOrEmpty(val) ? "<Not Set>" : val) {Tag = token as JValue};
+                    var node = new TreeNode(string.IsNullOrEmpty(val) ? "<Not Set>" : val) { Tag = token as JValue };
 
                     var childNode = parentNode.Nodes[parentNode.Nodes.Add(node)];
 
@@ -295,7 +295,7 @@ namespace JsonToTreeView
 
                     foreach(var property in obj.Properties())
                     {
-                        var node = new TreeNode(property.Name) {Tag = obj};
+                        var node = new TreeNode(property.Name) { Tag = obj };
 
                         var childNode = parentNode.Nodes[parentNode.Nodes.Add(node)];
 
@@ -378,14 +378,14 @@ namespace JsonToTreeView
             var listTokensNode = new MenuItem("List Tokens");
             listTokensNode.Click += OnListTokens;
 
-            return new ContextMenu(new MenuItem[] 
-            { 
-                copyNodeValue, 
-                findNodeItem, 
+            return new ContextMenu(new MenuItem[]
+            {
+                copyNodeValue,
+                findNodeItem,
                 toggleExpNodeItem,
                 CopyPathMenuItem,
-                decomposeNodeItem, 
-                listTokensNode 
+                decomposeNodeItem,
+                listTokensNode
             });
         }
 
@@ -421,16 +421,16 @@ namespace JsonToTreeView
             var formatJsonItem = new MenuItem("Toggle JSON Format");
             formatJsonItem.Click += OnFormatJSON;
 
-            var retVal = new ContextMenu(new MenuItem[] 
-            { 
-                searchFromJSONItem, 
-                copyItem, 
-                formatJsonItem, 
-                newJsonItem, 
-                buildItem, 
-                replaceValueItem, 
-                fixupJSONItem, 
-                listTokensNode 
+            var retVal = new ContextMenu(new MenuItem[]
+            {
+                searchFromJSONItem,
+                copyItem,
+                formatJsonItem,
+                newJsonItem,
+                buildItem,
+                replaceValueItem,
+                fixupJSONItem,
+                listTokensNode
             });
 
             return retVal;
@@ -496,7 +496,7 @@ namespace JsonToTreeView
             }
             else
             {
-                json = sciJSON.SelectedText;                
+                json = sciJSON.SelectedText;
             }
 
             if(!string.IsNullOrEmpty(json))
@@ -531,7 +531,7 @@ namespace JsonToTreeView
         private void PasteText()
         {
             trvJSON.Nodes.Clear();
-            //ProcessJSON(sciJSON.Text, "json");
+            sciJSON.Tag = false;
         }
 
         // ------------------------------------------------
@@ -639,10 +639,13 @@ namespace JsonToTreeView
                         {
                             if(child.Nodes.Count > 0)
                             {
-                                items.Add(new DecomposedItem() { Id = child.Nodes.Count > 0 && child.Nodes[0].Nodes.Count > 0 ? child.Nodes[0].Nodes[0].Text : string.Empty, 
-                                                                 Key = child.Nodes.Count > 1 && child.Nodes[1].Nodes.Count > 0 ? child.Nodes[1].Nodes[0].Text : string.Empty,
-                                                                 Value = child.Nodes.Count > 2 && child.Nodes[2].Nodes.Count > 0 ? child.Nodes[2].Nodes[0].Text : string.Empty,
-                                                                 DataType = child.Nodes.Count > 3 && child.Nodes[3].Nodes.Count > 0 ? child.Nodes[3].Nodes[0].Text : string.Empty});
+                                items.Add(new DecomposedItem()
+                                {
+                                    Id = child.Nodes.Count > 0 && child.Nodes[0].Nodes.Count > 0 ? child.Nodes[0].Nodes[0].Text : string.Empty,
+                                    Key = child.Nodes.Count > 1 && child.Nodes[1].Nodes.Count > 0 ? child.Nodes[1].Nodes[0].Text : string.Empty,
+                                    Value = child.Nodes.Count > 2 && child.Nodes[2].Nodes.Count > 0 ? child.Nodes[2].Nodes[0].Text : string.Empty,
+                                    DataType = child.Nodes.Count > 3 && child.Nodes[3].Nodes.Count > 0 ? child.Nodes[3].Nodes[0].Text : string.Empty
+                                });
                             }
                         }
                     }
@@ -753,7 +756,10 @@ namespace JsonToTreeView
         [ExcludeFromCodeCoverage]
         private void OnFormatJSON(object sender, EventArgs e)
         {
-            FormatJSON(!(bool)sciJSON.Tag);
+            if(sciJSON.Tag != null)
+            {
+                FormatJSON(!(bool)sciJSON.Tag);
+            }
         }
 
         // ------------------------------------------------
@@ -1055,6 +1061,23 @@ namespace JsonToTreeView
 
                 sciJSON.Margins[LINENUMBER_MARGIN].Width = sciJSON.TextWidth(Style.LineNumber, new string('9', maxLineNumberwidth + paddingLeft));
             }
+        }
+
+        // ------------------------------------------------
+
+        private void OnClearJSON(object sender, EventArgs e)
+        {
+            if(MessageBox.Show("All JSON in this tab will be lost!\r\nAre You Sure?", "Are You Sure?", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                tbJSON.Text = "{}";
+            }
+        }
+
+        // ------------------------------------------------
+
+        private void OnLoadExpandedToggle(object sender, EventArgs e)
+        {
+            sciJSON.Tag = false;
         }
     }
 }

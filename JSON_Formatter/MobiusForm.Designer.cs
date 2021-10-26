@@ -36,8 +36,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            JsonToTreeView.Exporters.MobiusExporter mobiusExporter2 = new JsonToTreeView.Exporters.MobiusExporter();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MobiusForm));
-            JsonToTreeView.Exporters.MobiusExporter mobiusExporter1 = new JsonToTreeView.Exporters.MobiusExporter();
             this.jTree = new JsonToTreeView.JTree();
             this.tbFileName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -75,6 +75,26 @@
             this.tcTabs.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // jTree
+            // 
+            this.jTree.AllowDrop = true;
+            this.jTree.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.jTree.Constants = new string[0];
+            this.jTree.CurrentColumn = 0;
+            this.jTree.CurrentLine = 0;
+            this.jTree.Exporter = mobiusExporter2;
+            this.jTree.JSON = "";
+            this.jTree.LoadExpanded = false;
+            this.jTree.Location = new System.Drawing.Point(0, 0);
+            this.jTree.Name = "jTree";
+            this.jTree.Size = new System.Drawing.Size(1145, 613);
+            this.jTree.SplitDistance = 644;
+            this.jTree.TabIndex = 2;
+            this.jTree.DragDrop += new System.Windows.Forms.DragEventHandler(this.OnDragDrop);
+            this.jTree.DragEnter += new System.Windows.Forms.DragEventHandler(this.OnDragEnter);
             // 
             // tbFileName
             // 
@@ -123,28 +143,28 @@
             // loadToolStripMenuItem
             // 
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.loadToolStripMenuItem.Text = "&Open";
             this.loadToolStripMenuItem.Click += new System.EventHandler(this.OnBrowse);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.saveToolStripMenuItem.Text = "&Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.OnSave);
             // 
             // tokenizeJSONToolStripMenuItem
             // 
             this.tokenizeJSONToolStripMenuItem.Name = "tokenizeJSONToolStripMenuItem";
-            this.tokenizeJSONToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.tokenizeJSONToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.tokenizeJSONToolStripMenuItem.Text = "&Tokenize JSON";
             this.tokenizeJSONToolStripMenuItem.Click += new System.EventHandler(this.OnTokenizeJSON);
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.aboutToolStripMenuItem.Text = "A&bout";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.OnAbout);
             // 
@@ -166,13 +186,13 @@
             this.treeNodeToolStripMenuItem,
             this.cToolStripMenuItem});
             this.PathFinderMenuItem.Name = "PathFinderMenuItem";
-            this.PathFinderMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.PathFinderMenuItem.Size = new System.Drawing.Size(198, 22);
             this.PathFinderMenuItem.Text = "&Path Finder Option";
             // 
             // postmanToolStripMenuItem
             // 
             this.postmanToolStripMenuItem.Name = "postmanToolStripMenuItem";
-            this.postmanToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.postmanToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.postmanToolStripMenuItem.Text = "Postman";
             this.postmanToolStripMenuItem.Click += new System.EventHandler(this.OnPathFinderSelection);
             // 
@@ -181,14 +201,14 @@
             this.treeNodeToolStripMenuItem.Checked = true;
             this.treeNodeToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.treeNodeToolStripMenuItem.Name = "treeNodeToolStripMenuItem";
-            this.treeNodeToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.treeNodeToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.treeNodeToolStripMenuItem.Text = "TreeNode";
             this.treeNodeToolStripMenuItem.Click += new System.EventHandler(this.OnPathFinderSelection);
             // 
             // cToolStripMenuItem
             // 
             this.cToolStripMenuItem.Name = "cToolStripMenuItem";
-            this.cToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.cToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.cToolStripMenuItem.Text = "CSharp";
             this.cToolStripMenuItem.Click += new System.EventHandler(this.OnPathFinderSelection);
             // 
@@ -198,7 +218,7 @@
             this.notepadToolStripMenuItem,
             this.notepadToolStripMenuItem1});
             this.ExporterMenuItem.Name = "ExporterMenuItem";
-            this.ExporterMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.ExporterMenuItem.Size = new System.Drawing.Size(198, 22);
             this.ExporterMenuItem.Text = "E&xporter";
             this.ExporterMenuItem.Visible = false;
             // 
@@ -221,14 +241,14 @@
             // loadConstantsToolStripMenuItem
             // 
             this.loadConstantsToolStripMenuItem.Name = "loadConstantsToolStripMenuItem";
-            this.loadConstantsToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.loadConstantsToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
             this.loadConstantsToolStripMenuItem.Text = "Load Token &Constants";
             this.loadConstantsToolStripMenuItem.Click += new System.EventHandler(this.OnLoadConstants);
             // 
             // createTokenConstantsToolStripMenuItem
             // 
             this.createTokenConstantsToolStripMenuItem.Name = "createTokenConstantsToolStripMenuItem";
-            this.createTokenConstantsToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.createTokenConstantsToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
             this.createTokenConstantsToolStripMenuItem.Text = "Create To&ken Constants";
             this.createTokenConstantsToolStripMenuItem.Click += new System.EventHandler(this.OnCreateTokenConstants);
             // 
@@ -270,7 +290,7 @@
             this.newToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.newToolStripButton.Name = "newToolStripButton";
             this.newToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.newToolStripButton.Text = "&New";
+            this.newToolStripButton.Text = "&New Tab";
             this.newToolStripButton.Click += new System.EventHandler(this.OnNewJSON);
             // 
             // openToolStripButton
@@ -280,7 +300,7 @@
             this.openToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.openToolStripButton.Name = "openToolStripButton";
             this.openToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.openToolStripButton.Text = "&Open";
+            this.openToolStripButton.Text = "&Open JSON File";
             this.openToolStripButton.Click += new System.EventHandler(this.OnBrowse);
             // 
             // saveToolStripButton
@@ -290,7 +310,7 @@
             this.saveToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.saveToolStripButton.Name = "saveToolStripButton";
             this.saveToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.saveToolStripButton.Text = "&Save";
+            this.saveToolStripButton.Text = "&Save As";
             this.saveToolStripButton.Click += new System.EventHandler(this.OnSave);
             // 
             // toolStripSeparator
@@ -305,7 +325,7 @@
             this.helpToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.helpToolStripButton.Name = "helpToolStripButton";
             this.helpToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.helpToolStripButton.Text = "Ab&out";
+            this.helpToolStripButton.Text = "A&bout";
             this.helpToolStripButton.Click += new System.EventHandler(this.OnAbout);
             // 
             // tcTabs
@@ -333,24 +353,6 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "JSON Tab";
             this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // jTree
-            // 
-            this.jTree.AllowDrop = true;
-            this.jTree.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.jTree.Constants = new string[0];
-            this.jTree.Exporter = mobiusExporter1;
-            this.jTree.JSON = "";
-            this.jTree.LoadExpanded = false;
-            this.jTree.Location = new System.Drawing.Point(0, 0);
-            this.jTree.Name = "jTree";
-            this.jTree.Size = new System.Drawing.Size(1145, 613);
-            this.jTree.SplitDistance = 644;
-            this.jTree.TabIndex = 2;
-            this.jTree.DragDrop += new System.Windows.Forms.DragEventHandler(this.OnDragDrop);
-            this.jTree.DragEnter += new System.Windows.Forms.DragEventHandler(this.OnDragEnter);
             // 
             // tabPage3
             // 
