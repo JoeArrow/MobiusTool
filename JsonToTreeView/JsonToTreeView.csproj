@@ -143,6 +143,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\Expand.png" />
+    <Content Include="Images\expandTree.png" />
+    <Content Include="Images\Search.png" />
     <Content Include="Images\Tree.png" />
     <Content Include="Images\Tree2.png" />
     <Content Include="JSON.ico" />

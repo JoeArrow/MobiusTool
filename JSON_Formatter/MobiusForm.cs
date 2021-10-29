@@ -398,6 +398,13 @@ namespace JSON_Formatter
 
         // ------------------------------------------------
 
+        private void OnClickFileName(object sender, EventArgs e)
+        {
+            tbFileName.SelectAll();
+        }
+
+        // ------------------------------------------------
+
         private void OnNewJSON(object sender, EventArgs e)
         {
             tcTabs.AddTab("{ }", "JSON Tab");

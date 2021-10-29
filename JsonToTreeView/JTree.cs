@@ -576,35 +576,37 @@ namespace JsonToTreeView
         private void OnToggleExpansion(object sender, EventArgs e)
         {
             var item = sender as MenuItem;
+            TreeNode node = tvJSON.SelectedNode ?? tvJSON.Nodes[0];
 
             if(item != null)
             {
-                Cursor = Cursors.WaitCursor;
-                var node = item.Tag as TreeNode;
+                node = item.Tag as TreeNode;
+            }
 
-                if(node != null)
+            Cursor = Cursors.WaitCursor;
+
+            if(node != null)
+            {
+                if(node.IsExpanded)
                 {
-                    if(node.IsExpanded)
-                    {
-                        node.Collapse();
-                    }
-                    else
-                    {
-                        trvJSON.BeginUpdate();
-                        node.ExpandAll();
-                        trvJSON.EndUpdate();
-                    }
-
-                    trvJSON.SelectedNode = node;
-
-                    if(trvJSON.SelectedNode.FirstNode != null)
-                    {
-                        trvJSON.SelectedNode.EnsureVisible();
-                    }
+                    node.Collapse();
+                }
+                else
+                {
+                    trvJSON.BeginUpdate();
+                    node.ExpandAll();
+                    trvJSON.EndUpdate();
                 }
 
-                Cursor = Cursors.Default;
+                trvJSON.SelectedNode = node;
+
+                if(trvJSON.SelectedNode.FirstNode != null)
+                {
+                    trvJSON.SelectedNode.EnsureVisible();
+                }
             }
+
+            Cursor = Cursors.Default;
         }
 
         // ------------------------------------------------
@@ -615,6 +617,24 @@ namespace JsonToTreeView
             if(!string.IsNullOrEmpty(sciJSON.SelectedText))
             {
                 lblNodesFound.Text = $"Found: {searchTool.Search(trvJSON.Nodes[0], sciJSON.SelectedText)}";
+            }
+        }
+
+        // ------------------------------------------------
+
+        [ExcludeFromCodeCoverage]
+        private void OnFullTreeSearch(object sender, EventArgs e)
+        {
+            if(tvJSON.Nodes.Count > 0)
+            {
+                using(var dlg = new SearchDialog())
+                {
+                    if(dlg.ShowDialog() == DialogResult.OK)
+                    {
+                        Clipboard.SetText(dlg.SearchTerm);
+                        lblNodesFound.Text = $"Found: {searchTool.Search(tvJSON.Nodes[0], dlg.SearchTerm)}";
+                    }
+                }
             }
         }
 

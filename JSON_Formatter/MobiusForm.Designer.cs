@@ -36,9 +36,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            JsonToTreeView.Exporters.MobiusExporter mobiusExporter2 = new JsonToTreeView.Exporters.MobiusExporter();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MobiusForm));
-            this.jTree = new JsonToTreeView.JTree();
+            JsonToTreeView.Exporters.MobiusExporter mobiusExporter1 = new JsonToTreeView.Exporters.MobiusExporter();
             this.tbFileName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -65,36 +64,17 @@
             this.saveToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.helpToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.tcTabs = new JSON_Formatter.TabControlEx();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
             this.label2 = new System.Windows.Forms.Label();
             this.lblNodePath = new System.Windows.Forms.Label();
+            this.tcTabs = new JSON_Formatter.TabControlEx();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.jTree = new JsonToTreeView.JTree();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.tcTabs.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // jTree
-            // 
-            this.jTree.AllowDrop = true;
-            this.jTree.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.jTree.Constants = new string[0];
-            this.jTree.CurrentColumn = 0;
-            this.jTree.CurrentLine = 0;
-            this.jTree.Exporter = mobiusExporter2;
-            this.jTree.JSON = "";
-            this.jTree.LoadExpanded = false;
-            this.jTree.Location = new System.Drawing.Point(0, 0);
-            this.jTree.Name = "jTree";
-            this.jTree.Size = new System.Drawing.Size(1145, 613);
-            this.jTree.SplitDistance = 644;
-            this.jTree.TabIndex = 2;
-            this.jTree.DragDrop += new System.Windows.Forms.DragEventHandler(this.OnDragDrop);
-            this.jTree.DragEnter += new System.Windows.Forms.DragEventHandler(this.OnDragEnter);
             // 
             // tbFileName
             // 
@@ -107,6 +87,7 @@
             this.tbFileName.Size = new System.Drawing.Size(1149, 24);
             this.tbFileName.TabIndex = 0;
             this.tbFileName.Text = "C:\\";
+            this.tbFileName.Click += new System.EventHandler(this.OnClickFileName);
             // 
             // label1
             // 
@@ -328,6 +309,28 @@
             this.helpToolStripButton.Text = "A&bout";
             this.helpToolStripButton.Click += new System.EventHandler(this.OnAbout);
             // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(17, 762);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(78, 16);
+            this.label2.TabIndex = 17;
+            this.label2.Text = "Node Path: ";
+            // 
+            // lblNodePath
+            // 
+            this.lblNodePath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblNodePath.AutoSize = true;
+            this.lblNodePath.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNodePath.Location = new System.Drawing.Point(101, 762);
+            this.lblNodePath.Name = "lblNodePath";
+            this.lblNodePath.Size = new System.Drawing.Size(0, 16);
+            this.lblNodePath.TabIndex = 18;
+            this.lblNodePath.MouseClick += new System.Windows.Forms.MouseEventHandler(this.OnNodePathLabelClick);
+            // 
             // tcTabs
             // 
             this.tcTabs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -354,6 +357,26 @@
             this.tabPage1.Text = "JSON Tab";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // jTree
+            // 
+            this.jTree.AllowDrop = true;
+            this.jTree.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.jTree.Constants = new string[0];
+            this.jTree.CurrentColumn = 0;
+            this.jTree.CurrentLine = 0;
+            this.jTree.Exporter = mobiusExporter1;
+            this.jTree.JSON = "";
+            this.jTree.LoadExpanded = false;
+            this.jTree.Location = new System.Drawing.Point(0, 0);
+            this.jTree.Name = "jTree";
+            this.jTree.Size = new System.Drawing.Size(1145, 613);
+            this.jTree.SplitDistance = 644;
+            this.jTree.TabIndex = 2;
+            this.jTree.DragDrop += new System.Windows.Forms.DragEventHandler(this.OnDragDrop);
+            this.jTree.DragEnter += new System.Windows.Forms.DragEventHandler(this.OnDragEnter);
+            // 
             // tabPage3
             // 
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
@@ -362,28 +385,6 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "New Tab";
             this.tabPage3.Visible = false;
-            // 
-            // label2
-            // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(17, 762);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(78, 16);
-            this.label2.TabIndex = 17;
-            this.label2.Text = "Node Path: ";
-            // 
-            // lblNodePath
-            // 
-            this.lblNodePath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblNodePath.AutoSize = true;
-            this.lblNodePath.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNodePath.Location = new System.Drawing.Point(101, 762);
-            this.lblNodePath.Name = "lblNodePath";
-            this.lblNodePath.Size = new System.Drawing.Size(0, 16);
-            this.lblNodePath.TabIndex = 18;
-            this.lblNodePath.MouseClick += new System.Windows.Forms.MouseEventHandler(this.OnNodePathLabelClick);
             // 
             // MobiusForm
             // 
