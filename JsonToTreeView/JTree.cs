@@ -30,6 +30,8 @@ namespace JsonToTreeView
 {
     public partial class JTree : UserControl
     {
+        private readonly string cr = Environment.NewLine;
+
         // -----------------------------------------
         // Indicators 0-7 could be in use by a lexer
         // so we'll use indicator 8 to highlight words.
@@ -818,7 +820,7 @@ namespace JsonToTreeView
             }
             else
             {
-                var result = MessageBox.Show("Save Existing JSON?", "Save Your Work", MessageBoxButtons.YesNoCancel);
+                var result = MessageBox.Show("Save Existing JSON?", "Save Your Work?", MessageBoxButtons.YesNoCancel);
 
                 switch(result)
                 {
@@ -1090,13 +1092,10 @@ namespace JsonToTreeView
             // ------------------------------------------------------
             // If the JSON Textbox is empty, we have nothing to fear.
 
-            if(string.IsNullOrEmpty(tbJSON.Text))
+            if(string.IsNullOrEmpty(tbJSON.Text) || MessageBox.Show($"All JSON in this tab will be lost!{cr}Are You Sure?", "Are You Sure?", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 tbJSON.Text = "{'':''}";
-            }
-            else if(MessageBox.Show("All JSON in this tab will be lost!\r\nAre You Sure?", "Are You Sure?", MessageBoxButtons.YesNo) == DialogResult.Yes)
-            {
-                tbJSON.Text = "{'':''}";
+                tbJSON.Tag = false;
             }
         }
 
