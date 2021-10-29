@@ -1087,9 +1087,16 @@ namespace JsonToTreeView
 
         private void OnClearJSON(object sender, EventArgs e)
         {
-            if(MessageBox.Show("All JSON in this tab will be lost!\r\nAre You Sure?", "Are You Sure?", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            // ------------------------------------------------------
+            // If the JSON Textbox is empty, we have nothing to fear.
+
+            if(string.IsNullOrEmpty(tbJSON.Text))
             {
-                tbJSON.Text = "{}";
+                tbJSON.Text = "{'':''}";
+            }
+            else if(MessageBox.Show("All JSON in this tab will be lost!\r\nAre You Sure?", "Are You Sure?", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                tbJSON.Text = "{'':''}";
             }
         }
 
