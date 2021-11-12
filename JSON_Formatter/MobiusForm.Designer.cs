@@ -86,7 +86,7 @@
             this.tbFileName.Name = "tbFileName";
             this.tbFileName.Size = new System.Drawing.Size(1149, 24);
             this.tbFileName.TabIndex = 0;
-            this.tbFileName.Text = "C:\\";
+            this.tbFileName.Text = "C:\\Usage\\JSON";
             this.tbFileName.Click += new System.EventHandler(this.OnClickFileName);
             // 
             // label1
@@ -344,6 +344,7 @@
             this.tcTabs.SelectedIndex = 0;
             this.tcTabs.Size = new System.Drawing.Size(1153, 642);
             this.tcTabs.TabIndex = 15;
+            this.tcTabs.Selected += new System.Windows.Forms.TabControlEventHandler(this.OnTabSelect);
             // 
             // tabPage1
             // 

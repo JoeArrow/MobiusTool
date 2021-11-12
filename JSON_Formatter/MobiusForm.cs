@@ -157,7 +157,7 @@ namespace JSON_Formatter
         {
             var jtree = tcTabs.SelectedTab.Controls[0] as JTree;
 
-            if(!string.IsNullOrEmpty(jtree.JSON))
+            if(jtree != null && !string.IsNullOrEmpty(jtree.JSON))
             {
                 var fileName = jtree.SaveJSON(tbFileName.Text);
 
@@ -419,6 +419,19 @@ namespace JSON_Formatter
             if (label != null)
             {
                 Clipboard.SetText(label.Text);
+            }
+        }
+
+        // ------------------------------------------------
+
+        private void OnTabSelect(object sender, TabControlEventArgs e)
+        {
+            var tab = sender as TabControl;
+            var fileName = tab.SelectedTab.Text;
+
+            if(tab != null && !(fileName.StartsWith("JSON Tab") || fileName.StartsWith("New Tab")))
+            {
+                tbFileName.Text = fileName;
             }
         }
 

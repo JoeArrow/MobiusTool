@@ -39,8 +39,6 @@ namespace JsonToTreeView
         const int HIGHLIGHT = 8;
 
         [ExcludeFromCodeCoverage]
-        private string FileName { set; get; }
-        [ExcludeFromCodeCoverage]
         public string[] Constants { set; get; }
         [ExcludeFromCodeCoverage]
         public IExporter Exporter { set; get; }
@@ -184,7 +182,7 @@ namespace JsonToTreeView
 
             if(!string.IsNullOrWhiteSpace(fileName))
             {
-                fileName = Path.GetFileName(FileName);
+                fileName = Path.GetFileName(fileName);
             }
 
             var dlg = new SaveFileDialog()
