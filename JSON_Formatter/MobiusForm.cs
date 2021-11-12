@@ -19,6 +19,7 @@ using Newtonsoft.Json.Linq;
 using JsonToTreeView;
 using AboutJoeWare_Lib;
 using JsonToTreeView.Exporters;
+using System.Drawing;
 
 namespace JSON_Formatter
 {
@@ -111,7 +112,7 @@ namespace JSON_Formatter
 
         // ------------------------------------------------
 
-        private void OnBrowse(object sender, EventArgs e)
+        private void OnLoadJson(object sender, EventArgs e)
         {
             var dlg = new OpenFileDialog()
             {
@@ -262,7 +263,7 @@ namespace JSON_Formatter
 
         private void OnDragDrop(object sender, DragEventArgs e)
         {
-            var fileNames = (string[]) e.Data.GetData(DataFormats.FileDrop, false);
+            var fileNames = (string[])e.Data.GetData(DataFormats.FileDrop, false);
 
             if(fileNames.Length > 0)
             {
@@ -307,7 +308,7 @@ namespace JSON_Formatter
                 catch(Exception exp)
                 {
                     var cr = Environment.NewLine;
-                    MessageBox.Show($"{exp.Message}{cr}{cr}Please make sure that there are no Tokens already in the JSON text.", 
+                    MessageBox.Show($"{exp.Message}{cr}{cr}Please make sure that there are no Tokens already in the JSON text.",
                                      "Failed to Parse JSON");
                 }
                 finally
@@ -330,7 +331,7 @@ namespace JSON_Formatter
                 Filter = $"Token Constants (*.{ext})|*.{ext}|All Files (*.*)|*.*"
             };
 
-            if (dlg.ShowDialog() == DialogResult.OK)
+            if(dlg.ShowDialog() == DialogResult.OK)
             {
                 LoadConstants(dlg.FileName);
             }
@@ -388,7 +389,7 @@ namespace JSON_Formatter
             Properties.Settings.Default.Location = Location;
             Properties.Settings.Default.LoadExpanded = jTree.LoadExpanded;
 
-            if (!string.IsNullOrEmpty(tbFileName.Text))
+            if(!string.IsNullOrEmpty(tbFileName.Text))
             {
                 Properties.Settings.Default.InitialPath = Path.GetDirectoryName(tbFileName.Text);
             }
@@ -416,7 +417,7 @@ namespace JSON_Formatter
         {
             var label = sender as Label;
 
-            if (label != null)
+            if(label != null)
             {
                 Clipboard.SetText(label.Text);
             }

@@ -37,7 +37,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MobiusForm));
-            JsonToTreeView.Exporters.MobiusExporter mobiusExporter1 = new JsonToTreeView.Exporters.MobiusExporter();
+            JsonToTreeView.Exporters.MobiusExporter mobiusExporter2 = new JsonToTreeView.Exporters.MobiusExporter();
             this.tbFileName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -126,7 +126,7 @@
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
             this.loadToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.loadToolStripMenuItem.Text = "&Open";
-            this.loadToolStripMenuItem.Click += new System.EventHandler(this.OnBrowse);
+            this.loadToolStripMenuItem.Click += new System.EventHandler(this.OnLoadJson);
             // 
             // saveToolStripMenuItem
             // 
@@ -282,7 +282,7 @@
             this.openToolStripButton.Name = "openToolStripButton";
             this.openToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.openToolStripButton.Text = "&Open JSON File";
-            this.openToolStripButton.Click += new System.EventHandler(this.OnBrowse);
+            this.openToolStripButton.Click += new System.EventHandler(this.OnLoadJson);
             // 
             // saveToolStripButton
             // 
@@ -367,7 +367,8 @@
             this.jTree.Constants = new string[0];
             this.jTree.CurrentColumn = 0;
             this.jTree.CurrentLine = 0;
-            this.jTree.Exporter = mobiusExporter1;
+            this.jTree.Exporter = mobiusExporter2;
+            this.jTree.FileName = null;
             this.jTree.JSON = "";
             this.jTree.LoadExpanded = false;
             this.jTree.Location = new System.Drawing.Point(0, 0);

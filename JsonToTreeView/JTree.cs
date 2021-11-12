@@ -39,7 +39,11 @@ namespace JsonToTreeView
         const int HIGHLIGHT = 8;
 
         [ExcludeFromCodeCoverage]
+        public string FileName { set; get; }
+
+        [ExcludeFromCodeCoverage]
         public string[] Constants { set; get; }
+
         [ExcludeFromCodeCoverage]
         public IExporter Exporter { set; get; }
 
@@ -196,6 +200,7 @@ namespace JsonToTreeView
             {
                 retVal = Path.GetFileNameWithoutExtension(dlg.FileName);
                 File.WriteAllText(dlg.FileName, JSON);
+                FileName = dlg.FileName;
             }
 
             return retVal;
@@ -969,25 +974,24 @@ namespace JsonToTreeView
         [ExcludeFromCodeCoverage]
         private void OnTreeKeyDown(object sender, KeyEventArgs e)
         {
-            if((e.Modifiers == Keys.Control && e.KeyCode == Keys.F3) ||
-                (e.Modifiers == Keys.Control && e.KeyCode == Keys.F))
+            switch(e.KeyData)
             {
-                Search(trvJSON.Nodes[0]);
-            }
-            else if(e.Modifiers == Keys.None && e.KeyCode == Keys.F3)
-            {
-                searchTool.Next();
-            }
-            else if(e.Modifiers == Keys.Shift && e.KeyCode == Keys.F3)
-            {
-                searchTool.Previous();
-            }
-            else if(e.Modifiers == Keys.Control && e.KeyCode == Keys.C)
-            {
-                // ---------------------------------
-                // Copy the text of the current node
+                case (Keys.Control | Keys.F3):
+                case (Keys.Control | Keys.F):
+                    Search(trvJSON.Nodes[0]);
+                    break;
 
-                Clipboard.SetText(trvJSON.SelectedNode.Text);
+                case (Keys.None | Keys.F3):
+                    searchTool.Next();
+                    break;
+
+                case (Keys.Shift | Keys.F3):
+                    searchTool.Previous();
+                    break;
+
+                case (Keys.Control | Keys.C):
+                    Clipboard.SetText(trvJSON.SelectedNode.Text);
+                    break;
             }
         }
 
@@ -1029,27 +1033,24 @@ namespace JsonToTreeView
         [ExcludeFromCodeCoverage]
         private void OnTextKeyUp(object sender, KeyEventArgs e)
         {
-            if(e.KeyData == Keys.Escape)
+            switch(e.KeyData)
             {
-                // --------------------------------
-                // Remove all uses of our indicator
+                case Keys.Escape:
+                    sciJSON.IndicatorCurrent = HIGHLIGHT;
+                    sciJSON.IndicatorClearRange(0, sciJSON.TextLength);
+                    break;
 
-                sciJSON.IndicatorCurrent = HIGHLIGHT;
-                sciJSON.IndicatorClearRange(0, sciJSON.TextLength);
-            }
-            else if(e.KeyData == (Keys.Control | Keys.C))
-            {
-                // ----
-                // Copy
+                case (Keys.Control | Keys.C):
+                    CopyText();
+                    break;
 
-                CopyText();
-            }
-            else if(e.KeyData == (Keys.Control | Keys.V))
-            {
-                // -----
-                // Paste
+                case (Keys.Control | Keys.V):
+                    PasteText();
+                    break;
 
-                PasteText();
+                case (Keys.Control | Keys.S):
+                    SaveJSON();
+                    break;
             }
         }
 

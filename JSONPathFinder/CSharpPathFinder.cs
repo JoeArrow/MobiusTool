@@ -33,7 +33,7 @@ namespace TreePathFinder
 
         public string GetArrayPath(string root, string path)
         {
-            var retVal = string.Empty;
+            var retVal = GetPath(path, true);
             return retVal;
         }
     }

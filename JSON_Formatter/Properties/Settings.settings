@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="InitialPath" Type="System.String" Scope="User">
-      <Value Profile="(Default)">C:\Usage\_Source\GBFP\Automated Tests\Postman\Collections\SLI</Value>
+      <Value Profile="(Default)">C:\Usage\JSON</Value>
     </Setting>
     <Setting Name="WordWrap" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
