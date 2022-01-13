@@ -104,6 +104,7 @@ namespace JsonToTreeView
         public JTree()
         {
             InitializeComponent();
+
             JSONStyle();
             LineNumberStyle();
             CodeFoldingStyle();
