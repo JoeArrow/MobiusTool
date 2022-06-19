@@ -19,7 +19,6 @@ using Newtonsoft.Json.Linq;
 using JsonToTreeView;
 using AboutJoeWare_Lib;
 using JsonToTreeView.Exporters;
-using System.Drawing;
 
 namespace JSON_Formatter
 {
