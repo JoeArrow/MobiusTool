@@ -58,10 +58,10 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>2810F51B2B6050056D4757B6F3EED03BB91C757E</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>110C4DDE42F929B3851171785B5A94F27AB0B917</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <GenerateManifests>false</GenerateManifests>
+    <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>JSON.ico</ApplicationIcon>
