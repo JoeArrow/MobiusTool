@@ -153,9 +153,16 @@ namespace JsonToTreeView
 
         private void SetTextPosition(int currentIndex)
         {
-            if(WordLines.Count > 0)
+            if(WordLines.Count >= currentIndex)
             {
-                m_jTree.tbJSON.Lines[WordLines[currentIndex]].Goto();
+                try
+                {
+                    m_jTree.tbJSON.Lines[WordLines[currentIndex]].Goto();
+                }
+                catch(Exception)
+                {
+                    // Just eat this exception
+                }
             }
         }
 

@@ -624,6 +624,10 @@ namespace JsonToTreeView
             {
                 lblNodesFound.Text = $"Found: {searchTool.Search(trvJSON.Nodes[0], sciJSON.SelectedText)}";
             }
+            else
+            {
+                OnFullTreeSearch(null, null);
+            }
         }
 
         // ------------------------------------------------

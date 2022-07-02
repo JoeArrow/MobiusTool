@@ -174,6 +174,7 @@ namespace JsonToTreeView
             this.toolStripButton3.Name = "toolStripButton3";
             this.toolStripButton3.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton3.Text = "toolStripButton3";
+            this.toolStripButton3.ToolTipText = "Search";
             this.toolStripButton3.Click += new System.EventHandler(this.OnJSONSearch);
             // 
             // lblColumn
@@ -277,6 +278,7 @@ namespace JsonToTreeView
             this.toolStripButton4.Name = "toolStripButton4";
             this.toolStripButton4.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton4.Text = "toolStripButton4";
+            this.toolStripButton4.ToolTipText = "Search";
             this.toolStripButton4.Click += new System.EventHandler(this.OnFullTreeSearch);
             // 
             // lblNodesFound
