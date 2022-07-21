@@ -69,9 +69,10 @@ namespace JsonToTreeView
             this.sptContainer = new System.Windows.Forms.SplitContainer();
             this.textToolStrip = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
+            this.btnTree = new System.Windows.Forms.ToolStripButton();
+            this.btnClear = new System.Windows.Forms.ToolStripButton();
+            this.btnSearch1 = new System.Windows.Forms.ToolStripButton();
+            this.btnOrient = new System.Windows.Forms.ToolStripButton();
             this.lblColumn = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -80,8 +81,8 @@ namespace JsonToTreeView
             this.label2 = new System.Windows.Forms.Label();
             this.treeToolStrip = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
+            this.btnExpand = new System.Windows.Forms.ToolStripButton();
+            this.btnSearch2 = new System.Windows.Forms.ToolStripButton();
             this.lblNodesFound = new System.Windows.Forms.Label();
             this.cbExpand = new System.Windows.Forms.CheckBox();
             this.trvJSON = new System.Windows.Forms.TreeView();
@@ -126,9 +127,10 @@ namespace JsonToTreeView
             // 
             this.textToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripLabel1,
-            this.toolStripButton1,
-            this.toolStripButton2,
-            this.toolStripButton3});
+            this.btnTree,
+            this.btnClear,
+            this.btnSearch1,
+            this.btnOrient});
             this.textToolStrip.Location = new System.Drawing.Point(0, 0);
             this.textToolStrip.Name = "textToolStrip";
             this.textToolStrip.Padding = new System.Windows.Forms.Padding(0, 0, 5, 0);
@@ -142,40 +144,53 @@ namespace JsonToTreeView
             this.toolStripLabel1.Size = new System.Drawing.Size(117, 22);
             this.toolStripLabel1.Text = "JSON Representation";
             // 
-            // toolStripButton1
+            // btnTree
             // 
-            this.toolStripButton1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton1.Text = "Toggle the Tree";
-            this.toolStripButton1.Click += new System.EventHandler(this.OnFormatJSON);
+            this.btnTree.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.btnTree.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnTree.Image = ((System.Drawing.Image)(resources.GetObject("btnTree.Image")));
+            this.btnTree.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnTree.Name = "btnTree";
+            this.btnTree.Size = new System.Drawing.Size(23, 22);
+            this.btnTree.Text = "Toggle the Tree";
+            this.btnTree.ToolTipText = "Toggle The Tree";
+            this.btnTree.Click += new System.EventHandler(this.OnFormatJSON);
             // 
-            // toolStripButton2
+            // btnClear
             // 
-            this.toolStripButton2.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
-            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Padding = new System.Windows.Forms.Padding(0, 0, 5, 0);
-            this.toolStripButton2.Size = new System.Drawing.Size(25, 22);
-            this.toolStripButton2.Text = "Clear JSON";
-            this.toolStripButton2.Click += new System.EventHandler(this.OnClearJSON);
+            this.btnClear.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.btnClear.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnClear.Image = ((System.Drawing.Image)(resources.GetObject("btnClear.Image")));
+            this.btnClear.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Padding = new System.Windows.Forms.Padding(0, 0, 5, 0);
+            this.btnClear.Size = new System.Drawing.Size(25, 22);
+            this.btnClear.Text = "Clear JSON";
+            this.btnClear.Click += new System.EventHandler(this.OnClearJSON);
             // 
-            // toolStripButton3
+            // btnSearch1
             // 
-            this.toolStripButton3.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton3.Image")));
-            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton3.Name = "toolStripButton3";
-            this.toolStripButton3.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton3.Text = "toolStripButton3";
-            this.toolStripButton3.ToolTipText = "Search";
-            this.toolStripButton3.Click += new System.EventHandler(this.OnJSONSearch);
+            this.btnSearch1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.btnSearch1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnSearch1.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch1.Image")));
+            this.btnSearch1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSearch1.Name = "btnSearch1";
+            this.btnSearch1.Size = new System.Drawing.Size(23, 22);
+            this.btnSearch1.Text = "toolStripButton3";
+            this.btnSearch1.ToolTipText = "Search";
+            this.btnSearch1.Click += new System.EventHandler(this.OnJSONSearch);
+            // 
+            // btnOrient
+            // 
+            this.btnOrient.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.btnOrient.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnOrient.Image = ((System.Drawing.Image)(resources.GetObject("btnOrient.Image")));
+            this.btnOrient.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnOrient.Name = "btnOrient";
+            this.btnOrient.Size = new System.Drawing.Size(23, 22);
+            this.btnOrient.Text = "toolStripButton6";
+            this.btnOrient.ToolTipText = "Re-Orient The Screen";
+            this.btnOrient.Click += new System.EventHandler(this.OnOrient);
             // 
             // lblColumn
             // 
@@ -226,6 +241,7 @@ namespace JsonToTreeView
             this.sciJSON.Name = "sciJSON";
             this.sciJSON.Size = new System.Drawing.Size(298, 128);
             this.sciJSON.TabIndex = 2;
+            this.sciJSON.Text = "{ }";
             this.sciJSON.UpdateUI += new System.EventHandler<ScintillaNET.UpdateUIEventArgs>(this.OnCaretPositionChange);
             this.sciJSON.TextChanged += new System.EventHandler(this.OnJSONTextChange);
             this.sciJSON.KeyUp += new System.Windows.Forms.KeyEventHandler(this.OnTextKeyUp);
@@ -243,8 +259,8 @@ namespace JsonToTreeView
             // 
             this.treeToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripLabel2,
-            this.toolStripButton5,
-            this.toolStripButton4});
+            this.btnExpand,
+            this.btnSearch2});
             this.treeToolStrip.Location = new System.Drawing.Point(0, 0);
             this.treeToolStrip.Name = "treeToolStrip";
             this.treeToolStrip.Padding = new System.Windows.Forms.Padding(0, 0, 5, 0);
@@ -258,28 +274,29 @@ namespace JsonToTreeView
             this.toolStripLabel2.Size = new System.Drawing.Size(110, 22);
             this.toolStripLabel2.Text = "Tree Representation";
             // 
-            // toolStripButton5
+            // btnExpand
             // 
-            this.toolStripButton5.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton5.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton5.Image")));
-            this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton5.Name = "toolStripButton5";
-            this.toolStripButton5.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton5.Text = "Expand Tree";
-            this.toolStripButton5.Click += new System.EventHandler(this.OnToggleExpansion);
+            this.btnExpand.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.btnExpand.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnExpand.Image = ((System.Drawing.Image)(resources.GetObject("btnExpand.Image")));
+            this.btnExpand.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnExpand.Name = "btnExpand";
+            this.btnExpand.Size = new System.Drawing.Size(23, 22);
+            this.btnExpand.Text = "Expand Tree";
+            this.btnExpand.ToolTipText = "Expand The Tree";
+            this.btnExpand.Click += new System.EventHandler(this.OnToggleExpansion);
             // 
-            // toolStripButton4
+            // btnSearch2
             // 
-            this.toolStripButton4.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton4.Image")));
-            this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton4.Name = "toolStripButton4";
-            this.toolStripButton4.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton4.Text = "toolStripButton4";
-            this.toolStripButton4.ToolTipText = "Search";
-            this.toolStripButton4.Click += new System.EventHandler(this.OnFullTreeSearch);
+            this.btnSearch2.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.btnSearch2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnSearch2.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch2.Image")));
+            this.btnSearch2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSearch2.Name = "btnSearch2";
+            this.btnSearch2.Size = new System.Drawing.Size(23, 22);
+            this.btnSearch2.Text = "toolStripButton4";
+            this.btnSearch2.ToolTipText = "Search";
+            this.btnSearch2.Click += new System.EventHandler(this.OnFullTreeSearch);
             // 
             // lblNodesFound
             // 
@@ -419,10 +436,11 @@ namespace JsonToTreeView
         private System.Windows.Forms.ToolStrip treeToolStrip;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         private System.Windows.Forms.ToolStripLabel toolStripLabel2;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
-        private System.Windows.Forms.ToolStripButton toolStripButton2;
-        private System.Windows.Forms.ToolStripButton toolStripButton3;
-        private System.Windows.Forms.ToolStripButton toolStripButton4;
-        private System.Windows.Forms.ToolStripButton toolStripButton5;
+        private System.Windows.Forms.ToolStripButton btnTree;
+        private System.Windows.Forms.ToolStripButton btnClear;
+        private System.Windows.Forms.ToolStripButton btnSearch1;
+        private System.Windows.Forms.ToolStripButton btnSearch2;
+        private System.Windows.Forms.ToolStripButton btnExpand;
+        private System.Windows.Forms.ToolStripButton btnOrient;
     }
 }

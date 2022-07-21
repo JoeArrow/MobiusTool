@@ -88,6 +88,22 @@ namespace JsonToTreeView
 
         // ------------------------------------------------
 
+        public Orientation Orientation 
+        {
+            set { sptContainer.Orientation = value; } 
+            get { return sptContainer.Orientation; }
+        }
+
+        // ------------------------------------------------
+
+        public int SplitDist
+        {
+            set { sptContainer.SplitterDistance = value; }
+            get { return sptContainer.SplitterDistance; }
+        }
+
+        // ------------------------------------------------
+
         public string[] AvailablePathFinders
         {
             get
@@ -109,6 +125,7 @@ namespace JsonToTreeView
             LineNumberStyle();
             CodeFoldingStyle();
 
+            sciJSON.Text = "{ }";
             Constants = new string[0];
             searchTool = new SearchTool(this);
             lblNodesFound.Text = string.Empty;
@@ -490,7 +507,7 @@ namespace JsonToTreeView
 
         private void CopyText()
         {
-            var json = string.Empty;
+            var json = "{ }";
 
             // ---------------------------------------
             // If text is selected, use the selection,
@@ -1108,6 +1125,14 @@ namespace JsonToTreeView
         private void OnLoadExpandedToggle(object sender, EventArgs e)
         {
             sciJSON.Tag = false;
+        }
+
+        // ------------------------------------------------
+
+        private void OnOrient(object sender, EventArgs e)
+        {
+            Orientation = (Orientation == Orientation.Vertical) ? Orientation.Horizontal : Orientation.Vertical;
+            SplitDist = (sptContainer.Orientation == Orientation.Vertical) ? sptContainer.Width / 2 : sptContainer.Height / 2;
         }
     }
 }

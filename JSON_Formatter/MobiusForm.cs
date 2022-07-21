@@ -28,10 +28,13 @@ namespace JSON_Formatter
         {
             InitializeComponent();
 
+            jTree.JSON = "{ }";
             Size = Properties.Settings.Default.Size;
             Location = Properties.Settings.Default.Location;
             SetPathFinder(Properties.Settings.Default.PathFinder);
+            jTree.SplitDist = Properties.Settings.Default.SplitDist;
             tbFileName.Text = Properties.Settings.Default.InitialPath;
+            jTree.Orientation = Properties.Settings.Default.Orientation;
             jTree.LoadExpanded = Properties.Settings.Default.LoadExpanded;
 
             if(!Directory.Exists(tbFileName.Text)) { tbFileName.Text = Properties.Settings.Default.DefaultPath; }
@@ -386,6 +389,8 @@ namespace JSON_Formatter
         {
             Properties.Settings.Default.Size = Size;
             Properties.Settings.Default.Location = Location;
+            Properties.Settings.Default.SplitDist = jTree.SplitDist;
+            Properties.Settings.Default.Orientation = jTree.Orientation;
             Properties.Settings.Default.LoadExpanded = jTree.LoadExpanded;
 
             if(!string.IsNullOrEmpty(tbFileName.Text))
