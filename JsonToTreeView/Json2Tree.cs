@@ -43,7 +43,7 @@ namespace JsonToTreeView
 
             var node = new TreeNode(name);
             var tNode = treeView.Nodes[treeView.Nodes.Add(node)];
-            tNode.ContextMenu = BuildNodeMenu(node);
+            tNode.ContextMenu = BuildContextMenu(node);
 
             AddNode(root, tNode);
             treeView.EndUpdate();
@@ -78,7 +78,7 @@ namespace JsonToTreeView
                         inTreeNode.ForeColor = Color.Blue;
                     }
 
-                    childNode.ContextMenu = BuildNodeMenu(node);
+                    childNode.ContextMenu = BuildContextMenu(node);
                 }
                 else if(token is JObject)
                 {
@@ -89,7 +89,7 @@ namespace JsonToTreeView
                         var node = new TreeNode(property.Name);
                         var childNode = inTreeNode.Nodes[inTreeNode.Nodes.Add(node)];
 
-                        childNode.ContextMenu = BuildNodeMenu(node);
+                        childNode.ContextMenu = BuildContextMenu(node);
                         AddNode(property.Value, childNode);
                     }
                 }
@@ -102,7 +102,7 @@ namespace JsonToTreeView
                         var node = new TreeNode($"[{index.ToString()}]");
                         var childNode = inTreeNode.Nodes[inTreeNode.Nodes.Add(node)];
 
-                        childNode.ContextMenu = BuildNodeMenu(node);
+                        childNode.ContextMenu = BuildContextMenu(node);
                         AddNode(array[index], childNode);
                     }
                 }
@@ -111,25 +111,25 @@ namespace JsonToTreeView
 
         // ------------------------------------------------
 
-        private ContextMenu BuildNodeMenu(TreeNode node)
+        private ContextMenu BuildContextMenu(TreeNode node)
         {
             var copyNodeValue = new MenuItem("Copy");
             copyNodeValue.Click += OnCopyNodeValue;
             copyNodeValue.Tag = node;
 
-            var copyNodeItem = new MenuItem("Copy Node Path");
-            copyNodeItem.Click += OnCopyNodePath;
-            copyNodeItem.Tag = node;
+            var search = new MenuItem("Search");
+            search.Tag = node;
+            search.Click += OnSearch;
 
-            var toggleExpNodeItem = new MenuItem("Toggle Node Expansion");
-            toggleExpNodeItem.Tag = node;
-            toggleExpNodeItem.Click += OnToggleExpansion;
+            var toggleNodeExpansion = new MenuItem("Toggle Node Expansion");
+            toggleNodeExpansion.Tag = node;
+            toggleNodeExpansion.Click += OnToggleExpansion;
 
-            var findNode = new MenuItem("Search");
-            findNode.Tag = node;
-            findNode.Click += OnSearch;
+            var copyNodePath = new MenuItem("Copy Node Path");
+            copyNodePath.Click += OnCopyNodePath;
+            copyNodePath.Tag = node;
 
-            var retVal = new ContextMenu(new MenuItem[] { copyNodeValue, findNode, toggleExpNodeItem, copyNodeItem });
+            var retVal = new ContextMenu(new MenuItem[] { copyNodeValue, search, toggleNodeExpansion, copyNodePath });
 
             return retVal;
         }
