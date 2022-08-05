@@ -177,6 +177,7 @@
     <Content Include="Images\Search.png" />
     <Content Include="Images\Tree.png" />
     <Content Include="Images\Tree2.png" />
+    <None Include="Images\ViewToggle.png" />
     <Content Include="JSON.ico" />
   </ItemGroup>
   <ItemGroup>

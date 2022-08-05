@@ -72,7 +72,6 @@ namespace JsonToTreeView
             this.btnTree = new System.Windows.Forms.ToolStripButton();
             this.btnClear = new System.Windows.Forms.ToolStripButton();
             this.btnSearch1 = new System.Windows.Forms.ToolStripButton();
-            this.btnOrient = new System.Windows.Forms.ToolStripButton();
             this.lblColumn = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -86,12 +85,14 @@ namespace JsonToTreeView
             this.lblNodesFound = new System.Windows.Forms.Label();
             this.cbExpand = new System.Windows.Forms.CheckBox();
             this.trvJSON = new System.Windows.Forms.TreeView();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.sptContainer)).BeginInit();
             this.sptContainer.Panel1.SuspendLayout();
             this.sptContainer.Panel2.SuspendLayout();
             this.sptContainer.SuspendLayout();
             this.textToolStrip.SuspendLayout();
             this.treeToolStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // sptContainer
@@ -114,6 +115,7 @@ namespace JsonToTreeView
             // 
             // sptContainer.Panel2
             // 
+            this.sptContainer.Panel2.Controls.Add(this.pictureBox1);
             this.sptContainer.Panel2.Controls.Add(this.treeToolStrip);
             this.sptContainer.Panel2.Controls.Add(this.lblNodesFound);
             this.sptContainer.Panel2.Controls.Add(this.cbExpand);
@@ -129,8 +131,7 @@ namespace JsonToTreeView
             this.toolStripLabel1,
             this.btnTree,
             this.btnClear,
-            this.btnSearch1,
-            this.btnOrient});
+            this.btnSearch1});
             this.textToolStrip.Location = new System.Drawing.Point(0, 0);
             this.textToolStrip.Name = "textToolStrip";
             this.textToolStrip.Padding = new System.Windows.Forms.Padding(0, 0, 5, 0);
@@ -179,18 +180,6 @@ namespace JsonToTreeView
             this.btnSearch1.Text = "toolStripButton3";
             this.btnSearch1.ToolTipText = "Search";
             this.btnSearch1.Click += new System.EventHandler(this.OnJSONSearch);
-            // 
-            // btnOrient
-            // 
-            this.btnOrient.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.btnOrient.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnOrient.Image = ((System.Drawing.Image)(resources.GetObject("btnOrient.Image")));
-            this.btnOrient.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnOrient.Name = "btnOrient";
-            this.btnOrient.Size = new System.Drawing.Size(23, 22);
-            this.btnOrient.Text = "toolStripButton6";
-            this.btnOrient.ToolTipText = "Re-Orient The Screen";
-            this.btnOrient.Click += new System.EventHandler(this.OnOrient);
             // 
             // lblColumn
             // 
@@ -241,7 +230,6 @@ namespace JsonToTreeView
             this.sciJSON.Name = "sciJSON";
             this.sciJSON.Size = new System.Drawing.Size(298, 128);
             this.sciJSON.TabIndex = 2;
-            this.sciJSON.Text = "{ }";
             this.sciJSON.UpdateUI += new System.EventHandler<ScintillaNET.UpdateUIEventArgs>(this.OnCaretPositionChange);
             this.sciJSON.TextChanged += new System.EventHandler(this.OnJSONTextChange);
             this.sciJSON.KeyUp += new System.Windows.Forms.KeyEventHandler(this.OnTextKeyUp);
@@ -311,7 +299,7 @@ namespace JsonToTreeView
             // 
             this.cbExpand.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cbExpand.AutoSize = true;
-            this.cbExpand.Location = new System.Drawing.Point(243, 164);
+            this.cbExpand.Location = new System.Drawing.Point(243, 163);
             this.cbExpand.Name = "cbExpand";
             this.cbExpand.Size = new System.Drawing.Size(101, 17);
             this.cbExpand.TabIndex = 2;
@@ -333,6 +321,17 @@ namespace JsonToTreeView
             this.trvJSON.KeyUp += new System.Windows.Forms.KeyEventHandler(this.OnTreeKeyUp);
             this.trvJSON.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.OnNodeDoubleClick);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox1.Image = global::JsonToTreeView.Properties.Resources.ViewToggle;
+            this.pictureBox1.Location = new System.Drawing.Point(220, 162);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(20, 20);
+            this.pictureBox1.TabIndex = 10;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.OnOrient);
+            // 
             // JTree
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -350,6 +349,7 @@ namespace JsonToTreeView
             this.textToolStrip.PerformLayout();
             this.treeToolStrip.ResumeLayout(false);
             this.treeToolStrip.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -441,6 +441,6 @@ namespace JsonToTreeView
         private System.Windows.Forms.ToolStripButton btnSearch1;
         private System.Windows.Forms.ToolStripButton btnSearch2;
         private System.Windows.Forms.ToolStripButton btnExpand;
-        private System.Windows.Forms.ToolStripButton btnOrient;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
