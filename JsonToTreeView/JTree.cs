@@ -125,7 +125,6 @@ namespace JsonToTreeView
             LineNumberStyle();
             CodeFoldingStyle();
 
-            sciJSON.Text = "{ }";
             Constants = new string[0];
             searchTool = new SearchTool(this);
             lblNodesFound.Text = string.Empty;
@@ -507,7 +506,7 @@ namespace JsonToTreeView
 
         private void CopyText()
         {
-            var json = "{ }";
+            var json = string.Empty;
 
             // ---------------------------------------
             // If text is selected, use the selection,

@@ -28,7 +28,7 @@ namespace JSON_Formatter
         {
             InitializeComponent();
 
-            jTree.JSON = "{ }";
+            //jTree.JSON = "{ }";
             Size = Properties.Settings.Default.Size;
             Location = Properties.Settings.Default.Location;
             SetPathFinder(Properties.Settings.Default.PathFinder);
