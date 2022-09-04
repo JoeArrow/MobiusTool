@@ -985,6 +985,13 @@ namespace JsonToTreeView
         }
 
         // ------------------------------------------------
+
+        public void EvenSplit()
+        {
+            SplitDist = (Orientation == Orientation.Vertical) ? sptContainer.Width / 2 : sptContainer.Height / 2;
+        }
+
+        // ------------------------------------------------
         /// <summary>
         ///     F3 for Next
         ///     Shift + F3 for Previous
@@ -1131,7 +1138,7 @@ namespace JsonToTreeView
         private void OnOrient(object sender, EventArgs e)
         {
             Orientation = (Orientation == Orientation.Vertical) ? Orientation.Horizontal : Orientation.Vertical;
-            SplitDist = (sptContainer.Orientation == Orientation.Vertical) ? sptContainer.Width / 2 : sptContainer.Height / 2;
+            EvenSplit();
         }
     }
 }

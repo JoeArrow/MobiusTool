@@ -13,9 +13,8 @@ namespace JSON_Formatter
         [STAThread]
         static void Main(string[] args)
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(args.Length > 0 ? new MobiusForm(args[0]) : new MobiusForm());
+            var app = new MobiusApp(args);
+            app.Run(args);
         }
     }
 }

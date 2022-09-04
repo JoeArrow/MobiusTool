@@ -75,7 +75,7 @@ namespace JSON_Formatter
 
             if(SelectedTab != null && SelectedTab.Text.Equals("New Tab"))
             {
-                retVal = AddTab("", $"{Properties.Settings.Default.DefaultTabText} {TabCount.ToString()}");
+                retVal = AddTab("", $"{Properties.Settings.Default.DefaultTabText} {TabCount.ToString()}").JTree();
             }
 
             return retVal;
@@ -83,7 +83,7 @@ namespace JSON_Formatter
 
         // ------------------------------------------------
 
-        public JTree AddTab(string json, string tabText)
+        public TabPage AddTab(string json, string tabText)
         {
             SelectedTab = Controls[Controls.Count - 1] as TabPage;
 
@@ -103,7 +103,7 @@ namespace JSON_Formatter
 
             retVal.JSON = json;
 
-            return SelectedTab.Controls[0] as JTree;
+            return SelectedTab;
         }
 
         // ------------------------------------------------
