@@ -396,7 +396,7 @@
             // 
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(1145, 791);
+            this.tabPage4.Size = new System.Drawing.Size(1145, 369);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "New Tab";
             this.tabPage4.Visible = false;

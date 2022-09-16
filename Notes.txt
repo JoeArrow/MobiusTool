@@ -4,6 +4,7 @@ Fixed-Width Fonts:
 
 ScintillaNET
     Setting the Font:  
+        https://github.com/jacobslusser/ScintillaNET/wiki
         https://github.com/jacobslusser/ScintillaNET/wiki/Automatic-Syntax-Highlighting
 
         scintellaNetObj.Styles[Style.Default].Size = 10;
