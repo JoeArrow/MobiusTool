@@ -162,7 +162,7 @@ namespace JsonToTreeView
 
         public void ProcessJSON(string json, string rootName)
         {
-            sciJSON.Text = json;
+            sciJSON.Text = json.Replace("'", "\u0027");
             sciJSON.Tag = false;
             lblNodesFound.Text = string.Empty;
 
@@ -885,14 +885,14 @@ namespace JsonToTreeView
         {
             bool retVal;
             sciJSON.Tag = pretty;
-            var token = null as JToken;
+            var jToken = null as JToken;
 
             sciJSON.ScrollWidth = 1;
             sciJSON.ScrollWidthTracking = true;
 
             try
             {
-                token = JToken.Parse(sciJSON.Text);
+                jToken = JToken.Parse(sciJSON.Text);
                 retVal = true;
             }
             catch(Exception exp)
@@ -905,7 +905,7 @@ namespace JsonToTreeView
 
             if(retVal)
             {
-                var json = token.ToString(pretty ? Formatting.Indented : Formatting.None);
+                var json = jToken.ToString(pretty ? Formatting.Indented : Formatting.None);
 
                 if(pretty)
                 {
@@ -914,7 +914,8 @@ namespace JsonToTreeView
                 }
                 else
                 {
-                    sciJSON.Text = json.Replace("\"'", "'")
+                    sciJSON.Text = json.Replace("'", "`")
+                                       .Replace("\"'", "'")
                                        .Replace("'\"", "'")
                                        .Replace("\"", "'");
                 }

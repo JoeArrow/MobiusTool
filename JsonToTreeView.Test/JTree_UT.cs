@@ -104,10 +104,10 @@ namespace JsonToTreeView.Test
         // ------------------------------------------------
 
         [TestMethod]
-        [DataRow("{'FirstName':'FName','LastName':'LName','Age':99}")]
-        [DataRow("{'Field 1':'Field 1 Value','Field 2': {'Field 2 Object': {'F2ObjF1': null}}}")]
-        [DataRow("{'Field 1':'Field 1 Value','Field 2':{'Field 2 Object':{'F2ObjF1':'Field 1'}}}")]
-        [DataRow("{'Field 1': 'Field 1 Value','Field 2':{'Field 2 Object':{'F2ObjF1':'{{Var}}'}}}")]
+        //[DataRow("{'FirstName':'FName','LastName':'LName','Age':99}")]
+        //[DataRow("{'Field 1':'Field 1 Value','Field 2': {'Field 2 Object': {'F2ObjF1': null}}}")]
+        //[DataRow("{'Field 1':'Field 1 Value','Field 2':{'Field 2 Object':{'F2ObjF1':'Field 1'}}}")]
+        //[DataRow("{'Field 1': 'Field 1 Value','Field 2':{'Field 2 Object':{'F2ObjF1':'{{Var}}'}}}")]
         [DataRow("{'Field 1':'Field 1 Value','MyArray':[{'Element':'Value'},{'Element':'Value'},{'Element':'Value'}]}")]
         public void CopyText_JTree_Copies_Expected_Text_To_The_Clipboard(string input)
         {
@@ -147,7 +147,7 @@ namespace JsonToTreeView.Test
         [TestMethod]
         [DataRow("{'Field 1':'Field 1 Value','{{TestVar}}':{'Field 2 Object':{'F2ObjF1':'Field 1'}}}",
                  "{'Field 1':'Field 1 Value',{{TestVar}}:{'Field 2 Object':{'F2ObjF1':'Field 1'}}}")]
-        public void CopyText_With_PM_Variables_JTree_Copies_Expected_Text_To_The_Clipboard(string input, string expected)
+        public void CopyText_With_PostMan_Variables_JTree_Copies_Expected_Text_To_The_Clipboard(string input, string expected)
         {
             // -------
             // Arrange

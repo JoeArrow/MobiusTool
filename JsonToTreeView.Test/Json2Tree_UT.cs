@@ -80,7 +80,7 @@ namespace JsonToTreeView.Test
             // ---
             // Act
 
-            sut.BuildTree(token, "MyTree");
+            sut.BuildTree(json, "MyTree");
 
             // ------
             // Assert
