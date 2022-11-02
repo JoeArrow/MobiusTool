@@ -42,32 +42,6 @@ namespace JsonToTreeView.Test
 
         // ------------------------------------------------
 
-        #region Additional test attributes
-#pragma warning disable S125
-        // ------------------------------------------------
-        // You can use the following additional attributes 
-        // as you write your tests:
-        //
-        // Use ClassInitialize to run code before running the first test in the class
-        // [ClassInitialize()]
-        // public static void MyClassInitialize(TestContext testContext) { }
-        //
-        // Use ClassCleanup to run code after all tests in a class have run
-        // [ClassCleanup()]
-        // public static void MyClassCleanup() { }
-        //
-        // Use TestInitialize to run code before running each test 
-        // [TestInitialize()]
-        // public void MyTestInitialize() { }
-        //
-        // Use TestCleanup to run code after each test has run
-        // [TestCleanup()]
-        // public void MyTestCleanup() { }
-#pragma warning restore S125
-        #endregion
-
-        // ------------------------------------------------
-
         [TestMethod]
         [DataRow(new string[] { "Postman", "TreeNode", "CSharp" })]
         public void AvailablePathFinders_JTree_Returns_List_Of_Available_PathFinders(string[] expected)
@@ -104,10 +78,6 @@ namespace JsonToTreeView.Test
         // ------------------------------------------------
 
         [TestMethod]
-        //[DataRow("{'FirstName':'FName','LastName':'LName','Age':99}")]
-        //[DataRow("{'Field 1':'Field 1 Value','Field 2': {'Field 2 Object': {'F2ObjF1': null}}}")]
-        //[DataRow("{'Field 1':'Field 1 Value','Field 2':{'Field 2 Object':{'F2ObjF1':'Field 1'}}}")]
-        //[DataRow("{'Field 1': 'Field 1 Value','Field 2':{'Field 2 Object':{'F2ObjF1':'{{Var}}'}}}")]
         [DataRow("{'Field 1':'Field 1 Value','MyArray':[{'Element':'Value'},{'Element':'Value'},{'Element':'Value'}]}")]
         public void CopyText_JTree_Copies_Expected_Text_To_The_Clipboard(string input)
         {
