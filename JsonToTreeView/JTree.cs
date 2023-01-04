@@ -892,7 +892,7 @@ namespace JsonToTreeView
 
             try
             {
-                jToken = JToken.Parse(sciJSON.Text);
+                jToken = JToken.Parse(sciJSON.Text.Replace("\\\"", "'"));
                 retVal = true;
             }
             catch(Exception exp)
