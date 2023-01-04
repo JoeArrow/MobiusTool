@@ -39,7 +39,7 @@
       <Value Profile="(Default)">C:\</Value>
     </Setting>
     <Setting Name="Orientation" Type="System.Windows.Forms.Orientation" Scope="User">
-      <Value Profile="(Default)">Vertical</Value>
+      <Value Profile="(Default)">Horizontal</Value>
     </Setting>
     <Setting Name="SplitDist" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">303</Value>
