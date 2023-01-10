@@ -158,17 +158,12 @@ namespace JsonToTreeView.Test
         [DataRow("{'Field 1':'Field 1 Value','Field 2':{'Field 2 Object':{'F2ObjF1':\"{{Var}}\"}}}",
                  false,
                  "{\r\n  \"Field 1\": \"Field 1 Value\",\r\n  \"Field 2\": {\r\n    \"Field 2 Object\": {\r\n      \"F2ObjF1\": {{Var}}\r\n    }\r\n  }\r\n}")]
-        public void FormatJSON_JTree_Correctly_Formats_A_String_Of_JSON(string json, bool pretty, string expected)
+        public void FormatJSON_JTree(string json, bool pretty, string expected)
         {
             // -------
             // Arrange
 
             var sut = new JTree(json);
-
-            // ---
-            // Log
-
-            Console.WriteLine($"Input:{crt}{json}{cr}Expected:{crt}{expected}{cr}");
 
             // ---
             // Act
