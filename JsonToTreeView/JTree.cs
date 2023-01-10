@@ -802,7 +802,7 @@ namespace JsonToTreeView
         [ExcludeFromCodeCoverage]
         private void OnFormatJSON(object sender, EventArgs e)
         {
-            if(sciJSON.Tag != null)
+            if(!string.IsNullOrWhiteSpace(sciJSON.Text) && sciJSON.Tag != null)
             {
                 FormatJSON(!(bool)sciJSON.Tag);
             }
