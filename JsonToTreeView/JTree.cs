@@ -1141,5 +1141,12 @@ namespace JsonToTreeView
             Orientation = (Orientation == Orientation.Vertical) ? Orientation.Horizontal : Orientation.Vertical;
             EvenSplit();
         }
+
+        // ------------------------------------------------
+
+        private void OnSplitterDoubleclick(object sender, EventArgs e)
+        {
+            EvenSplit();
+        }
     }
 }
