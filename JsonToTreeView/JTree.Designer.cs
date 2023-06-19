@@ -126,6 +126,7 @@ namespace JsonToTreeView
             this.sptContainer.SplitterWidth = 5;
             this.sptContainer.TabIndex = 0;
             this.sptContainer.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.SyncTargets);
+            this.sptContainer.DoubleClick += new System.EventHandler(this.OnSplitterDoubleclick);
             // 
             // textToolStrip
             // 

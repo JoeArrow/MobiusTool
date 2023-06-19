@@ -7,6 +7,7 @@
 #endregion
 
 using System;
+using System.Text.RegularExpressions;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -20,6 +21,7 @@ namespace JsonToTreeView.Test
     [TestClass]
     public class SearchTool_UT
     {
+        private readonly string cr = Environment.NewLine;
         private const string JSON = "{'Field 1':'Field 1 Value','Field 2':{'Field 2 Object':{'F2ObjF1':'Field 1'}}}";
 
         public SearchTool_UT() { }
@@ -183,6 +185,54 @@ namespace JsonToTreeView.Test
 
                 Assert.IsTrue(currentIndex <= maxIndex);
             }
+        }
+
+        // ------------------------------------------------
+
+        [TestMethod]
+        [DataRow("This is a test o\xA0\xA0f finding hex values in a string", @"\xA0", 16)]
+        public void Search_SearchTool_String(string fullString, string searchVal, int expected)
+        {
+            // -------
+            // Arrange
+
+            var sut = new SearchTool();
+
+            // ---
+            // Act
+
+            var resp = sut.Search(fullString, searchVal);
+
+            // ------
+            // Assert
+
+            Assert.AreEqual(expected, resp);
+        }
+
+        // ------------------------------------------------
+
+        [TestMethod]
+        [DataRow(@"This is a test o\xA0\xA8f finding and removing hex val\x8Aues in a string", 
+                  "This is a test of finding and removing hex values in a string")]
+        public void RemoveHex_SearchTool(string fullString, string expected)
+        {
+            // -------
+            // Arrange
+
+            var result = fullString;
+            var sut = new SearchTool();
+
+            // ---
+            // Act
+
+            var resp = sut.RemoveHex(fullString);
+
+            Console.WriteLine($"Before: '{fullString}'{cr}After:  '{resp}'");
+
+            // ------
+            // Assert
+
+            Assert.AreEqual(expected, resp);
         }
     }
 }

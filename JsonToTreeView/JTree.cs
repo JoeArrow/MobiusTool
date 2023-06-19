@@ -643,7 +643,10 @@ namespace JsonToTreeView
         {
             if(!string.IsNullOrEmpty(sciJSON.SelectedText))
             {
-                lblNodesFound.Text = $"Found: {searchTool.Search(trvJSON.Nodes[0], sciJSON.SelectedText)}";
+                if(trvJSON.Nodes.Count > 0)
+                {
+                    lblNodesFound.Text = $"Found: {searchTool.Search(trvJSON.Nodes[0], sciJSON.SelectedText)}";
+                }
             }
             else
             {
@@ -906,6 +909,16 @@ namespace JsonToTreeView
                 retVal = false;
                 trvJSON.Nodes.Clear();
 
+                //var regEx = new Regex("(?<=\\bposition\\s)\\d+");
+                var regEx = new Regex("(?<=Bad JSON escape sequence:\\s).*(?=\\.)");
+                var match = regEx.Match(exp.Message);
+
+                if(match.Success)
+                {
+                    sciJSON.Focus();
+                    //sciJSON.GotoPosition(int.Parse(match.Value));
+                }
+
                 MessageBox.Show(exp.Message);
             }
 
@@ -961,18 +974,18 @@ namespace JsonToTreeView
 
         private string FixupJSON(string json, bool protectVars)
         {
-            Regex r;
+            Regex regEx;
 
             if(protectVars)
             {
-                r = new Regex("{{\\w+}}");
+                regEx = new Regex("{{\\w+}}");
             }
             else
             {
-                r = new Regex("\"{{\\w+}}\"");
+                regEx = new Regex("\"{{\\w+}}\"");
             }
 
-            var matches = r.Matches(json);
+            var matches = regEx.Matches(json);
             var processed = new StringCollection();
 
             foreach(var match in matches)
@@ -1177,6 +1190,13 @@ namespace JsonToTreeView
         private void OnNodeExpand(object sender, TreeViewEventArgs e)
         {
             SetExpandImage(e.Node);
+        }
+
+        // ------------------------------------------------
+
+        private void OnSplitterDoubleclick(object sender, EventArgs e)
+        {
+            EvenSplit();
         }
     }
 }
