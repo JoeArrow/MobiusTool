@@ -101,7 +101,7 @@ namespace JsonToTreeView
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.sptContainer.Location = new System.Drawing.Point(0, 4);
-            this.sptContainer.Margin = new System.Windows.Forms.Padding(4);
+            this.sptContainer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.sptContainer.Name = "sptContainer";
             // 
             // sptContainer.Panel1
@@ -234,7 +234,7 @@ namespace JsonToTreeView
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.sciJSON.Location = new System.Drawing.Point(4, 37);
-            this.sciJSON.Margin = new System.Windows.Forms.Padding(4);
+            this.sciJSON.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.sciJSON.Name = "sciJSON";
             this.sciJSON.Size = new System.Drawing.Size(421, 157);
             this.sciJSON.TabIndex = 2;
@@ -256,10 +256,11 @@ namespace JsonToTreeView
             // 
             this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox1.Image = global::JsonToTreeView.Properties.Resources.ViewToggle;
-            this.pictureBox1.Location = new System.Drawing.Point(265, 199);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBox1.Location = new System.Drawing.Point(280, 199);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(27, 25);
+            this.pictureBox1.Size = new System.Drawing.Size(19, 22);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 10;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.OnOrient);
@@ -321,8 +322,8 @@ namespace JsonToTreeView
             // 
             this.cbExpand.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cbExpand.AutoSize = true;
-            this.cbExpand.Location = new System.Drawing.Point(309, 202);
-            this.cbExpand.Margin = new System.Windows.Forms.Padding(4);
+            this.cbExpand.Location = new System.Drawing.Point(313, 202);
+            this.cbExpand.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbExpand.Name = "cbExpand";
             this.cbExpand.Size = new System.Drawing.Size(122, 20);
             this.cbExpand.TabIndex = 2;
@@ -336,9 +337,9 @@ namespace JsonToTreeView
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.trvJSON.Location = new System.Drawing.Point(0, 37);
-            this.trvJSON.Margin = new System.Windows.Forms.Padding(4);
+            this.trvJSON.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.trvJSON.Name = "trvJSON";
-            this.trvJSON.Size = new System.Drawing.Size(433, 157);
+            this.trvJSON.Size = new System.Drawing.Size(437, 157);
             this.trvJSON.TabIndex = 0;
             this.trvJSON.AfterCollapse += new System.Windows.Forms.TreeViewEventHandler(this.OnNodeExpand);
             this.trvJSON.AfterExpand += new System.Windows.Forms.TreeViewEventHandler(this.OnNodeExpand);
@@ -353,7 +354,7 @@ namespace JsonToTreeView
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.sptContainer);
-            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "JTree";
             this.Size = new System.Drawing.Size(876, 229);
             this.sptContainer.Panel1.ResumeLayout(false);
