@@ -25,6 +25,8 @@ using JWSortable;
 using TreePathFinder;
 using JSON.String.Extensions;
 using JsonToTreeView.Exporters;
+using JsonToTreeView.Properties;
+using System.Xml.Linq;
 
 namespace JsonToTreeView
 {
@@ -497,6 +499,7 @@ namespace JsonToTreeView
                     {
                         Clipboard.SetText(dlg.SearchTerm);
                         lblNodesFound.Text = $"Found: {searchTool.Search(node, dlg.SearchTerm)}";
+                        SetExpandImage(node);
                     }
                 }
             }
@@ -628,6 +631,8 @@ namespace JsonToTreeView
                 }
             }
 
+            SetExpandImage(node);
+
             Cursor = Cursors.Default;
         }
 
@@ -717,6 +722,7 @@ namespace JsonToTreeView
         private void OnNodeClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             NodeClickedEvent?.Invoke(this, new NodeClickedEventArgs(e.Node.FullPath));
+            SetExpandImage(e.Node);
         }
 
         // ------------------------------------------------
@@ -1140,6 +1146,37 @@ namespace JsonToTreeView
         {
             Orientation = (Orientation == Orientation.Vertical) ? Orientation.Horizontal : Orientation.Vertical;
             EvenSplit();
+        }
+
+        // ------------------------------------------------
+
+        private void SetExpandImage(TreeNode node)
+        {
+            if(node != null)
+            {
+                if(node.IsExpanded)
+                {
+                    btnExpand.Image = Resources.Contract;
+                }
+                else
+                {
+                    btnExpand.Image = Resources.Expand;
+                }
+            }
+        }
+
+        // ------------------------------------------------
+
+        private void OnNodeSelect(object sender, TreeViewEventArgs e)
+        {
+            SetExpandImage(e.Node);
+        }
+
+        // ------------------------------------------------
+
+        private void OnNodeExpand(object sender, TreeViewEventArgs e)
+        {
+            SetExpandImage(e.Node);
         }
     }
 }

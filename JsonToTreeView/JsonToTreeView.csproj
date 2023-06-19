@@ -171,6 +171,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\Contract.png" />
     <Content Include="Images\Expand.png" />
     <Content Include="Images\expandTree.png" />
     <Content Include="Images\OrientToggle.ico" />
