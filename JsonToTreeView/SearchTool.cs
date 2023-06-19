@@ -47,7 +47,7 @@ namespace JsonToTreeView
         public string RemoveHex(string fullText)
         {
             var retVal = fullText;
-            var regEx = new Regex(@"\\x\w{2}");
+            var regEx = new Regex(@"(0[xX]\w{2})|(\\[xX]\w{2})");
 
             var matches = regEx.Matches(fullText);
 
