@@ -25,6 +25,8 @@ using JWSortable;
 using TreePathFinder;
 using JSON.String.Extensions;
 using JsonToTreeView.Exporters;
+using JsonToTreeView.Properties;
+using System.Xml.Linq;
 
 namespace JsonToTreeView
 {
@@ -620,6 +622,7 @@ namespace JsonToTreeView
                     trvJSON.EndUpdate();
                 }
 
+                SetExpandImage(node);
                 trvJSON.SelectedNode = node;
 
                 if(trvJSON.SelectedNode.FirstNode != null)
@@ -627,6 +630,7 @@ namespace JsonToTreeView
                     trvJSON.SelectedNode.EnsureVisible();
                 }
             }
+
 
             Cursor = Cursors.Default;
         }
@@ -1129,6 +1133,13 @@ namespace JsonToTreeView
 
         // ------------------------------------------------
 
+        private void OnNodeSelection(object sender, TreeViewEventArgs e)
+        {
+            SetExpandImage(e.Node);
+        }
+
+        // ------------------------------------------------
+
         private void OnLoadExpandedToggle(object sender, EventArgs e)
         {
             sciJSON.Tag = false;
@@ -1140,6 +1151,30 @@ namespace JsonToTreeView
         {
             Orientation = (Orientation == Orientation.Vertical) ? Orientation.Horizontal : Orientation.Vertical;
             EvenSplit();
+        }
+
+        // ------------------------------------------------
+
+        private void OnExpandToggle(object sender, TreeViewEventArgs e)
+        {
+            SetExpandImage(e.Node);
+        }
+
+        // ------------------------------------------------
+
+        private void SetExpandImage(TreeNode node)
+        {
+            if(node != null)
+            {
+                if(node.IsExpanded)
+                {
+                    btnExpand.Image = Resources.Contract;
+                }
+                else
+                {
+                    btnExpand.Image = Resources.Expand;
+                }
+            }
         }
     }
 }
