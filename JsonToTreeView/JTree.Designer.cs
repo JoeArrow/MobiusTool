@@ -288,7 +288,7 @@ namespace JsonToTreeView
             // 
             this.btnExpand.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.btnExpand.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnExpand.Image = ((System.Drawing.Image)(resources.GetObject("btnExpand.Image")));
+            this.btnExpand.Image = global::JsonToTreeView.Properties.Resources.Expand;
             this.btnExpand.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnExpand.Name = "btnExpand";
             this.btnExpand.Size = new System.Drawing.Size(23, 22);
@@ -341,6 +341,9 @@ namespace JsonToTreeView
             this.trvJSON.Name = "trvJSON";
             this.trvJSON.Size = new System.Drawing.Size(437, 157);
             this.trvJSON.TabIndex = 0;
+            this.trvJSON.AfterCollapse += new System.Windows.Forms.TreeViewEventHandler(this.OnNodeExpand);
+            this.trvJSON.AfterExpand += new System.Windows.Forms.TreeViewEventHandler(this.OnNodeExpand);
+            this.trvJSON.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.OnNodeSelect);
             this.trvJSON.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.OnNodeClick);
             this.trvJSON.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OnTreeKeyDown);
             this.trvJSON.KeyUp += new System.Windows.Forms.KeyEventHandler(this.OnTreeKeyUp);

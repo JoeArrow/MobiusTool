@@ -460,6 +460,16 @@ namespace JSON_Formatter
 
         // ------------------------------------------------
 
+        private void OnRemoveHex(object sender, EventArgs e)
+        {
+            var tool = new SearchTool();
+
+            var json = ((JTree)tcTabs.SelectedTab.Controls[0]).JSON;
+            ((JTree)tcTabs.SelectedTab.Controls[0]).JSON = tool.RemoveHex(json);
+        }
+
+        // ------------------------------------------------
+
         private void OnTabSelect(object sender, TabControlEventArgs e)
         {
             var tab = sender as TabControl;
