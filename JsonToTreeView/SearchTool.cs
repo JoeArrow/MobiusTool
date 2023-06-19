@@ -43,6 +43,37 @@ namespace JsonToTreeView
 
         // ------------------------------------------------
 
+        public string RemoveHex(string fullText)
+        {
+            var retVal = fullText;
+            var regEx = new Regex(@"(0[xX]\w{2})|(\\[xX]\w{2})");
+
+            var matches = regEx.Matches(fullText);
+
+            foreach(Match match in matches)
+            {
+                retVal = retVal.Replace(match.Value, string.Empty);
+            }
+
+            return retVal;
+        }
+
+        // ------------------------------------------------
+
+        public int Search(string fullText, string val)
+        {
+            var retVal = -1;
+            var regEx = new Regex(Regex.Unescape(val));
+
+            var match = regEx.Match(fullText);
+
+            if(match.Success) { retVal = match.Index; }
+
+            return retVal;
+        }
+
+        // ------------------------------------------------
+
         public int Search(TreeNode node, string val)
         {
             Nodes.Clear();
