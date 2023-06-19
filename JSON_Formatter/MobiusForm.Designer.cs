@@ -71,7 +71,6 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.jTree = new JsonToTreeView.JTree();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.removeHexValuesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.tcTabs.SuspendLayout();
@@ -118,7 +117,6 @@
             this.loadToolStripMenuItem,
             this.saveToolStripMenuItem,
             this.tokenizeJSONToolStripMenuItem,
-            this.removeHexValuesToolStripMenuItem,
             this.aboutToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
@@ -127,28 +125,28 @@
             // loadToolStripMenuItem
             // 
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.loadToolStripMenuItem.Text = "&Open";
             this.loadToolStripMenuItem.Click += new System.EventHandler(this.OnLoadJson);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.saveToolStripMenuItem.Text = "&Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.OnSave);
             // 
             // tokenizeJSONToolStripMenuItem
             // 
             this.tokenizeJSONToolStripMenuItem.Name = "tokenizeJSONToolStripMenuItem";
-            this.tokenizeJSONToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.tokenizeJSONToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.tokenizeJSONToolStripMenuItem.Text = "&Tokenize JSON";
             this.tokenizeJSONToolStripMenuItem.Click += new System.EventHandler(this.OnTokenizeJSON);
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.aboutToolStripMenuItem.Text = "A&bout";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.OnAbout);
             // 
@@ -403,13 +401,6 @@
             this.tabPage4.Text = "New Tab";
             this.tabPage4.Visible = false;
             // 
-            // removeHexValuesToolStripMenuItem
-            // 
-            this.removeHexValuesToolStripMenuItem.Name = "removeHexValuesToolStripMenuItem";
-            this.removeHexValuesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.removeHexValuesToolStripMenuItem.Text = "&Remove Hex values";
-            this.removeHexValuesToolStripMenuItem.Click += new System.EventHandler(this.OnRemoveHex);
-            // 
             // MobiusForm
             // 
             this.AllowDrop = true;
@@ -479,7 +470,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblNodePath;
         private System.Windows.Forms.TabPage tabPage4;
-        private System.Windows.Forms.ToolStripMenuItem removeHexValuesToolStripMenuItem;
     }
 }
 

@@ -25,6 +25,8 @@ using JWSortable;
 using TreePathFinder;
 using JSON.String.Extensions;
 using JsonToTreeView.Exporters;
+using JsonToTreeView.Properties;
+using System.Xml.Linq;
 
 namespace JsonToTreeView
 {
@@ -620,6 +622,7 @@ namespace JsonToTreeView
                     trvJSON.EndUpdate();
                 }
 
+                SetExpandImage(node);
                 trvJSON.SelectedNode = node;
 
                 if(trvJSON.SelectedNode.FirstNode != null)
@@ -627,6 +630,7 @@ namespace JsonToTreeView
                     trvJSON.SelectedNode.EnsureVisible();
                 }
             }
+
 
             Cursor = Cursors.Default;
         }
@@ -638,10 +642,7 @@ namespace JsonToTreeView
         {
             if(!string.IsNullOrEmpty(sciJSON.SelectedText))
             {
-                if(trvJSON.Nodes.Count > 0)
-                {
-                    lblNodesFound.Text = $"Found: {searchTool.Search(trvJSON.Nodes[0], sciJSON.SelectedText)}";
-                }
+                lblNodesFound.Text = $"Found: {searchTool.Search(trvJSON.Nodes[0], sciJSON.SelectedText)}";
             }
             else
             {
@@ -903,16 +904,6 @@ namespace JsonToTreeView
                 retVal = false;
                 trvJSON.Nodes.Clear();
 
-                //var regEx = new Regex("(?<=\\bposition\\s)\\d+");
-                var regEx = new Regex("(?<=Bad JSON escape sequence:\\s).*(?=\\.)");
-                var match = regEx.Match(exp.Message);
-
-                if(match.Success)
-                {
-                    sciJSON.Focus();
-                    //sciJSON.GotoPosition(int.Parse(match.Value));
-                }
-
                 MessageBox.Show(exp.Message);
             }
 
@@ -968,18 +959,18 @@ namespace JsonToTreeView
 
         private string FixupJSON(string json, bool protectVars)
         {
-            Regex regEx;
+            Regex r;
 
             if(protectVars)
             {
-                regEx = new Regex("{{\\w+}}");
+                r = new Regex("{{\\w+}}");
             }
             else
             {
-                regEx = new Regex("\"{{\\w+}}\"");
+                r = new Regex("\"{{\\w+}}\"");
             }
 
-            var matches = regEx.Matches(json);
+            var matches = r.Matches(json);
             var processed = new StringCollection();
 
             foreach(var match in matches)
@@ -1142,6 +1133,13 @@ namespace JsonToTreeView
 
         // ------------------------------------------------
 
+        private void OnNodeSelection(object sender, TreeViewEventArgs e)
+        {
+            SetExpandImage(e.Node);
+        }
+
+        // ------------------------------------------------
+
         private void OnLoadExpandedToggle(object sender, EventArgs e)
         {
             sciJSON.Tag = false;
@@ -1157,9 +1155,26 @@ namespace JsonToTreeView
 
         // ------------------------------------------------
 
-        private void OnSplitterDoubleclick(object sender, EventArgs e)
+        private void OnExpandToggle(object sender, TreeViewEventArgs e)
         {
-            EvenSplit();
+            SetExpandImage(e.Node);
+        }
+
+        // ------------------------------------------------
+
+        private void SetExpandImage(TreeNode node)
+        {
+            if(node != null)
+            {
+                if(node.IsExpanded)
+                {
+                    btnExpand.Image = Resources.Contract;
+                }
+                else
+                {
+                    btnExpand.Image = Resources.Expand;
+                }
+            }
         }
     }
 }

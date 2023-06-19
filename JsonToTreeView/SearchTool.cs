@@ -12,7 +12,6 @@ using System.Windows.Forms;
 using System.Collections.Generic;
 
 using ScintillaNET;
-using System.Text.RegularExpressions;
 
 namespace JsonToTreeView
 {
