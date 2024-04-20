@@ -210,7 +210,7 @@ namespace JsonToTreeView
 
                         if(node != null)
                         {
-                            treeSearch.Search(node, dlg.SearchTerm);
+                            treeSearch.Search(node, dlg.SearchTerm, dlg.cbUseRegex.Checked);
                         }
                     }
                 }

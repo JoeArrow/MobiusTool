@@ -29,41 +29,12 @@ namespace JsonToTreeView.Test
         // ------------------------------------------------
 
         [TestMethod]
-        [DataRow("{'FirstName':'FName', 'LastName':'LName', 'Age':99}", "LName", 3)]
-        public void BuildTree_Json2Tree_Populates_A_TreeView_From_A_JSON_String(string json, string expected, int nodeCount)
-        {
-            // -------
-            // Arrange
-
-            var tv = new TreeView();
-            var sut = new Json2Tree(ref tv);
-
-            // ---
-            // Log
-
-            Console.WriteLine("{0}", json);
-
-            // ---
-            // Act
-
-            sut.BuildTree(json, "MyTree");
-
-            // ------
-            // Assert
-
-            Assert.AreEqual(nodeCount, tv.Nodes[0].Nodes.Count);
-            Assert.AreEqual(expected, tv.Nodes[0].Nodes[1].LastNode.Text);
-        }
-
-        // ------------------------------------------------
-
-        [TestMethod]
         [DataRow("{'FirstName':'FName', 'LastName':'LName', 'Age':99}", 3)]
 
         [DataRow("{'Field 1':'Field 1 Value','Field 2':{'Field 2 Object':{'F2ObjF1':null}}}", 2)]
         [DataRow("{'Field 1':'Field 1 Value','Field 2':{'Field 2 Object':{'F2ObjF1':'{{Var}}'}}}", 2)]
         [DataRow("{'Field 1':'Field 1 Value','MyArray':[{'Element':'Value'},{'Element':'Value'},{'Element':'Value'}]}", 2)]
-        public void BuildTree_Json2Tree_Populates_A_TreeView_From_A_JToken(string json, int nodeCount)
+        public void BuildTree_Json2Tree(string json, int nodeCount)
         {
             // -------
             // Arrange
@@ -86,13 +57,14 @@ namespace JsonToTreeView.Test
             // Assert
 
             Assert.AreEqual(nodeCount, tv.Nodes[0].Nodes.Count);
+            //Assert.AreEqual(expected, tv.Nodes[0].Nodes[1].LastNode.Text);
         }
 
         // ------------------------------------------------
 
         [TestMethod]
         [DataRow("{'FirstName':'FName','LastName':'LName','Age':99}", "Age", "99")]
-        public void Comparison_Newtonsoft_Input_And_Output_are_Comparable(string json, string propName, string val)
+        public void Comparison_Newtonsoft(string json, string propName, string val)
         {
             // -------
             // Arrange

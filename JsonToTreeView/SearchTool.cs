@@ -64,7 +64,7 @@ namespace JsonToTreeView
         public int Search(string fullText, string val)
         {
             var retVal = -1;
-            var regEx = new Regex(Regex.Unescape(val));
+            var regEx = GetRegex(val);
 
             var match = regEx.Match(fullText);
 
@@ -75,7 +75,7 @@ namespace JsonToTreeView
 
         // ------------------------------------------------
 
-        public int Search(TreeNode node, string val)
+        public int Search(TreeNode node, string val, bool useRegex)
         {
             Nodes.Clear();
             SearchTerm = val;
@@ -83,7 +83,7 @@ namespace JsonToTreeView
             if(!string.IsNullOrEmpty(SearchTerm))
             {
                 currentIndex = 0;
-                RecursiveSearch(node);
+                RecursiveSearch(node, useRegex);
 
                 if(Nodes.Count > 0)
                 {
@@ -104,17 +104,30 @@ namespace JsonToTreeView
 
         // ------------------------------------------------
 
-        private void RecursiveSearch(TreeNode node)
+        private void RecursiveSearch(TreeNode node, bool useRegex = false)
         {
             foreach(TreeNode testNode in node.Nodes)
             {
                 // ---------------------------------------------
                 // Check both the Name and the Value for a match
 
-                if(testNode.Text.ToLower().Contains(SearchTerm.ToLower().Trim()) ||
-                   testNode.Name.ToLower().Contains(SearchTerm.ToLower().Trim()))
+                if(useRegex)
                 {
-                    Nodes.Add(testNode);
+                    var regex = GetRegex(SearchTerm.Trim());
+
+                    if(regex.Match(testNode.Text.ToLower()).Success || 
+                       regex.Match(testNode.Name.ToLower()).Success)
+                    {
+                        Nodes.Add(testNode);
+                    }
+                }
+                else
+                {
+                    if(testNode.Text.ToLower().Contains(SearchTerm.ToLower().Trim()) ||
+                       testNode.Name.ToLower().Contains(SearchTerm.ToLower().Trim()))
+                    {
+                        Nodes.Add(testNode);
+                    }
                 }
 
                 // --------------------
@@ -122,7 +135,7 @@ namespace JsonToTreeView
 
                 if(node.Nodes != null && node.Nodes.Count > 0)
                 {
-                    RecursiveSearch(testNode);
+                    RecursiveSearch(testNode, useRegex);
                 }
             }
         }
@@ -245,6 +258,33 @@ namespace JsonToTreeView
 
                 m_jTree.tbJSON.TargetStart = 0;
             }
+        }
+
+        // ------------------------------------------------
+
+        private Regex GetRegex(string searchTerm)
+        {
+            Regex retVal = new Regex("~_~");
+
+            if(!string.IsNullOrWhiteSpace(searchTerm))
+            {
+                var options = RegexOptions.Multiline | RegexOptions.IgnoreCase;
+
+                // ------------------------------------
+                // Allows us to write Windows eol RegEx
+                // that still works in this app
+
+                try
+                {
+                    retVal = new Regex(searchTerm.Replace(@"\r\n", @"\n"), options);
+                }
+                catch(Exception /*ex*/)
+                {
+                    retVal = new Regex("~_~");
+                }
+            }
+
+            return retVal;
         }
     }
 }

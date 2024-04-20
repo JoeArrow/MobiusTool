@@ -339,7 +339,7 @@
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Size = new System.Drawing.Size(1145, 616);
             this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "JSON Tab 2";
+            this.tabPage3.Text = "JSON Tab 3";
             this.tabPage3.Visible = false;
             // 
             // tcTabs
