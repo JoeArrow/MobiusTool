@@ -33,6 +33,7 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.tbTerm = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.cbUseRegex = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // btnSearch
@@ -73,16 +74,32 @@
             this.label1.TabIndex = 3;
             this.label1.Text = "Search Term:";
             // 
+            // cbUseRegex
+            // 
+            this.cbUseRegex.AutoSize = true;
+            this.cbUseRegex.Location = new System.Drawing.Point(211, 15);
+            this.cbUseRegex.Name = "cbUseRegex";
+            this.cbUseRegex.Size = new System.Drawing.Size(80, 17);
+            this.cbUseRegex.TabIndex = 4;
+            this.cbUseRegex.Text = "Use RegEx";
+            this.cbUseRegex.UseVisualStyleBackColor = true;
+            this.cbUseRegex.Visible = false;
+            // 
             // SearchDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(299, 103);
+            this.Controls.Add(this.cbUseRegex);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.tbTerm);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSearch);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(315, 142);
+            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(315, 142);
             this.Name = "SearchDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Search";
@@ -98,5 +115,6 @@
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.TextBox tbTerm;
         private System.Windows.Forms.Label label1;
+        public System.Windows.Forms.CheckBox cbUseRegex;
     }
 }

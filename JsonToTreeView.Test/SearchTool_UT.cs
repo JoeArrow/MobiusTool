@@ -20,7 +20,7 @@ namespace JsonToTreeView.Test
     [TestClass]
     public class SearchTool_UT
     {
-        private const string JSON = "{'Field 1':'Field 1 Value','Field 2':{'Field 2 Object':{'F2ObjF1':'Field 1'}}}";
+        private const string _JSON = "{'Field 1':'Field 1 Value','Field 2':{'Field 2 Object':{'F2ObjF1':'Field 1'}}}";
 
         public SearchTool_UT() { }
 
@@ -62,10 +62,11 @@ namespace JsonToTreeView.Test
         // ------------------------------------------------
 
         [TestMethod]
-        [DataRow("Field", 5)]
-        [DataRow("_Field", 0)]
-        [DataRow("Field 1", 3)]
-        public void Search_SearchTool_Locates_The_Expected_Number_Of_Entries(string searchTerm, int expectedCount)
+        [DataRow("Field", 5, false)]
+        [DataRow("_Field", 0, false)]
+        [DataRow("Field 1", 3, false)]
+        [DataRow(@"(?<=Field\s+)2", 2, true)]
+        public void Search_SearchTool(string searchTerm, int expectedCount, bool useRegex)
         {
             // -------
             // Arrange
@@ -73,18 +74,18 @@ namespace JsonToTreeView.Test
             var cr = $"{Environment.NewLine}";
             var crt = $"{Environment.NewLine}\t";
 
-            var jTree = new JTree(JSON);
+            var jTree = new JTree(_JSON);
             var sut = new SearchTool(jTree);
 
             // ---
             // Log
 
-            Console.WriteLine($"JSON:{crt}{JSON}{cr}Search Term:{crt}{searchTerm}{cr}Expected Count{crt}{expectedCount}{cr}");
+            Console.WriteLine($"JSON:{crt}{_JSON}{cr}Search Term:{crt}{searchTerm}{cr}Expected Count{crt}{expectedCount}{cr}");
 
             // ---
             // Act
 
-            var res = sut.Search(jTree.RootNode, searchTerm);
+            var res = sut.Search(jTree.RootNode, searchTerm, useRegex);
 
             // ---
             // Log
@@ -100,9 +101,9 @@ namespace JsonToTreeView.Test
         // ------------------------------------------------
 
         [TestMethod]
-        [DataRow("Field")]
-        [DataRow("_Field")]
-        public void Next_SearchTool_Successfully_Navigates_Through_The_Found_TreeNodes(string searchTerm)
+        [DataRow("Field", false)]
+        [DataRow("_Field", false)]
+        public void Next_SearchTool(string searchTerm, bool useRegex)
         {
             // -------
             // Arrange
@@ -110,7 +111,7 @@ namespace JsonToTreeView.Test
             var cr = $"{Environment.NewLine}";
             var crt = $"{Environment.NewLine}\t";
 
-            var jTree = new JTree(JSON);
+            var jTree = new JTree(_JSON);
             var sut = new SearchTool(jTree);
 
             // ---
@@ -123,7 +124,7 @@ namespace JsonToTreeView.Test
 
             var currentIndex = 0;
 
-            var maxIndex = sut.Search(jTree.RootNode, searchTerm);
+            var maxIndex = sut.Search(jTree.RootNode, searchTerm, useRegex);
 
             for(var i = 0; i < maxIndex * 2; i++)
             {
@@ -144,9 +145,9 @@ namespace JsonToTreeView.Test
         // ------------------------------------------------
 
         [TestMethod]
-        [DataRow("Field")]
-        [DataRow("_Field")]
-        public void Previous_SearchTool_Successfully_Navigates_Through_The_Found_TreeNodes(string searchTerm)
+        [DataRow("Field", false)]
+        [DataRow("_Field", false)]
+        public void Previous_SearchTool(string searchTerm, bool useRegex)
         {
             // -------
             // Arrange
@@ -154,7 +155,7 @@ namespace JsonToTreeView.Test
             var cr = $"{Environment.NewLine}";
             var crt = $"{Environment.NewLine}\t";
 
-            var jTree = new JTree(JSON);
+            var jTree = new JTree(_JSON);
             var sut = new SearchTool(jTree);
 
             // ---
@@ -167,7 +168,7 @@ namespace JsonToTreeView.Test
 
             var currentIndex = 0;
 
-            var maxIndex = sut.Search(jTree.RootNode, searchTerm);
+            var maxIndex = sut.Search(jTree.RootNode, searchTerm, useRegex);
 
             for(var i = 0; i < maxIndex * 2; i++)
             {

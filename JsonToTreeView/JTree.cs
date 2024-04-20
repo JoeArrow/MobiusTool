@@ -498,7 +498,7 @@ namespace JsonToTreeView
                     if(dlg.ShowDialog() == DialogResult.OK)
                     {
                         Clipboard.SetText(dlg.SearchTerm);
-                        lblNodesFound.Text = $"Found: {searchTool.Search(node, dlg.SearchTerm)}";
+                        lblNodesFound.Text = $"Found: {searchTool.Search(node, dlg.SearchTerm, dlg.cbUseRegex.Checked)}";
                     }
                 }
             }
@@ -642,7 +642,7 @@ namespace JsonToTreeView
         {
             if(!string.IsNullOrEmpty(sciJSON.SelectedText))
             {
-                lblNodesFound.Text = $"Found: {searchTool.Search(trvJSON.Nodes[0], sciJSON.SelectedText)}";
+                lblNodesFound.Text = $"Found: {searchTool.Search(trvJSON.Nodes[0], sciJSON.SelectedText, true)}";
             }
             else
             {
@@ -662,7 +662,7 @@ namespace JsonToTreeView
                     if(dlg.ShowDialog() == DialogResult.OK)
                     {
                         Clipboard.SetText(dlg.SearchTerm);
-                        lblNodesFound.Text = $"Found: {searchTool.Search(tvJSON.Nodes[0], dlg.SearchTerm)}";
+                        lblNodesFound.Text = $"Found: {searchTool.Search(tvJSON.Nodes[0], dlg.SearchTerm, dlg.cbUseRegex.Checked)}";
                     }
                 }
             }

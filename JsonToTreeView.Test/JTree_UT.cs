@@ -44,7 +44,7 @@ namespace JsonToTreeView.Test
 
         [TestMethod]
         [DataRow(new string[] { "Postman", "TreeNode", "CSharp" })]
-        public void AvailablePathFinders_JTree_Returns_List_Of_Available_PathFinders(string[] expected)
+        public void AvailablePathFinders_JTree(string[] expected)
         {
             // -------
             // Arrange
@@ -79,7 +79,7 @@ namespace JsonToTreeView.Test
 
         [TestMethod]
         [DataRow("{'Field 1':'Field 1 Value','MyArray':[{'Element':'Value'},{'Element':'Value'},{'Element':'Value'}]}")]
-        public void CopyText_JTree_Copies_Expected_Text_To_The_Clipboard(string input)
+        public void CopyText_JTree(string input)
         {
             // -------
             // Arrange
@@ -117,7 +117,7 @@ namespace JsonToTreeView.Test
         [TestMethod]
         [DataRow("{'Field 1':'Field 1 Value','{{TestVar}}':{'Field 2 Object':{'F2ObjF1':'Field 1'}}}",
                  "{'Field 1':'Field 1 Value',{{TestVar}}:{'Field 2 Object':{'F2ObjF1':'Field 1'}}}")]
-        public void CopyText_With_PostMan_Variables_JTree_Copies_Expected_Text_To_The_Clipboard(string input, string expected)
+        public void CopyText_With_PostMan(string input, string expected)
         {
             // -------
             // Arrange
